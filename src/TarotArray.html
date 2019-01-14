@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/globle.css">
+	<title>牌阵页</title>
+	<style>
+		.hearder{
+			text-align: center;
+			height: 5rem;
+			background-color: black;
+			color: white;
+		}
+		.hearder:hover .remarks{
+			position: absolute;
+			z-index: 1000;
+			display: block;
+		}
+		.current{
+			height: 100%;
+			line-height: 5rem;
+		}
+		.zhen{
+			width: 60%;
+			position: relative;
+			margin:0px auto;
+		}
+		.box{
+			position: absolute;
+			width: 5rem;
+			height: 10rem;
+			display: flex;
+			align-items: center;
+		}
+		.caption{
+			width: 100%;
+			background-color: gray;
+			height: 1.5rem;
+			line-height: 20px;
+			text-align: center;
+			font-size: 1rem;
+			color: white;
+			position: absolute;
+			bottom: 0;
+		}
+		.remarks{
+			width: 60%;
+			padding: 0.5rem;
+			background-color: greenyellow;
+			display: none;
+		}
+		.mark{
+			border: 1px solid gold;
+			border-radius: 5px;
+			margin: 10px;
+			padding: 5px;
+		}
+		.mark>h2{
+			text-align: center;
+		}
+		.mark>p{
+			text-align: left;
+			text-indent: 2em;
+			word-wrap:break-word;
+			/*white-space: wrap*/
+		}
+		.mark>p>span{color: red}
+		
+		.save{
+			top: 18rem;
+		}
+		.back{
+			top: 15rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="hearder">
+			<div class="current">请按照顺序点击</div>
+			<ul class="remarks"></ul>
+		</div>
+		<div class="zhen"></div>
+	</div>
+
+	<div class="save side">保存记录</div>
+	<div class="back side">返回首页</div>
+</body>
+<script src="../js/truth.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/TarotArray.js"></script>
+<script>
+var zhen = document.querySelector('.zhen')
+var cap = document.querySelectorAll('.caption')
+var current = document.querySelector('.current')
+var markBox = document.querySelector('.remarks')
+var save = document.querySelector('.save')
+var back = document.querySelector('.back')
+var mes = getParmas() // 信息
+var backUrl = sessionStorage.getItem('backUrl')
+var rated = Tarr[mes.formation].rated
+
+var login = {
+	data:{},
+	init:function(){
+		var obj = getParmas()
+		console.log(obj)
+		this.data = obj
+		this.create()
+		if(sessionStorage.getItem('backUrl') == "detail"){
+			fan_all()
+		}
+	},
+	create:function(){
+		var formation = this.data.formation
+		var kind = this.data.kind
+		var data = this.data.data
+
+
+		for(var i=0;i<data.length;i++){
+			var Arrays = Tarr[formation][i];//当前牌阵
+
+			var box = document.createElement("div");
+			box.className = 'box'
+			box.style.top = Arrays.y + 'vw'
+			box.style.left = Arrays.x + 'vw'
+			box.style.transform = 'rotate('+ Arrays.ag +'deg)'
+			box.setAttribute('order',i)//牌的位置序号
+
+			createPai(box, data[i].No, data[i].direction, kind) //  生成牌
+
+			var p = document.createElement('p');
+			p.className = 'caption';
+			p.innerHTML = Arrays.conte
+			box.appendChild(p);
+			document.querySelector('.zhen').appendChild(box)
+		}
+	}
+}
+login.init()
+
+//解析展示栏 -> 调用解析对象，具体标签由nature决定
+//渲染到li中，我在犹豫要不要整：点击详情页？
+function createMark(idx,odr,type,zn){
+	// idx : 塔罗牌号
+	// odr : 牌阵位号
+	// type : 测试类型：健康/工作
+	// zn ：牌的正逆位
+
+	var lineUp = Tarr[mes.formation] // 牌阵对象
+
+	current.innerHTML = "当前阵位："+ lineUp[odr].conte //导航提示信息
+	var li = document.createElement('li');
+	li.className = "mark";
+	var r = rd(0,200), g = rd(0,180), b = rd(0,200);
+	li.innerHTML = "<h2>"+compare[type]+"方面，关于"+lineUp[odr].conte+"：</h2></p>" + truth[idx][type][zn];
+	li.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
+	document.querySelectorAll('.box')[odr].querySelector('.caption').style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
+	markBox.appendChild(li)
+}
+
+//操作牌的核心处理函数
+var handle = (function(){
+	var i = 0;
+	var nature = mes.nature
+	return function(e){
+			if(e.target.className == "box"){
+				
+				console.log("order = "+index)
+			}
+			if(e.target.className == 'bei'){
+				var el = e.target.parentNode
+				var index = e.target.parentNode.parentNode.attributes.order.value // 牌阵序号->按序号翻牌
+				if(i == parseInt(index) && i < Tarr[mes.formation].rated){
+					var ag = getRoutate(el.style.transform,'Z')
+					var numbers = el.getAttribute('no.')
+					var zn = el.getAttribute('wei') == '正' ? 'z' : 'n';
+					el.style.transform = "rotateZ("+ ag +"deg) rotateY(180deg)"
+					createMark(numbers,i,nature,zn)
+					i++
+					setTimeout(function(){
+						el.removeChild(e.target)
+					},300)
+				} else if(i >= Tarr[mes.formation].rated){
+					alert("打住， 无需再翻")
+				} else {
+					mask({
+						title:"牌阵详情",
+						content:'img',
+						imgSrc:Tarr[mes.formation].array,
+						className:"alertImg",
+						callback:function(_mark){
+							console.log("保存消失整了吗？")
+						}
+					})
+				}
+				
+			} else if(e.target.className == 'biao'){
+				var el = e.target.parentNode
+				var numbers = el.getAttribute('no.')
+				var _url = 'detail.html?No='+numbers+"&kind="+mes.kind
+				direct(_url)
+			}
+		}
+})()
+
+zhen.addEventListener('click',handle)
+
+//保存记录按钮
+if(!isSave(mes.Date)){
+	save.style.display = 'none'
+}
+save.onclick = function(){
+	var _key = mes.Date
+	if(isSave(_key)){
+		mask({
+			title:"请在下方输入测试内容",
+			btn:"确认保存",
+			content:'text',
+			className:"saveMark",
+			callback:function(_mark){
+				//可分为按时间查询new Date("2018.2.12 00:01").getTime()与按问题查询/??/.test(??)
+				var _value = window.location.search.substr(1)
+				var _saveBody = {
+					remark:_mark,
+					record:_value,
+					date:mes.Date
+				}
+				localStorage.setItem('Tarot'+_key, JSON.stringify(_saveBody))
+				save.style.display = 'none'
+				console.log('this:=',this)
+			}
+		})
+	} else {
+		alert('查询到已有ID，请勿重复保存')
+	}
+}
+
+back.onclick = function(){
+	direct('../index.html')
+}
+
+function isSave(checks){
+	var _check = 'Tarot'+checks;
+	for(x in localStorage){
+		if(_check == x){
+			return false
+		}
+	}
+	return true
+}
+
+// 当从详情页返回时所有牌自动打开
+function fan_all(){
+	var pai = document.querySelectorAll('.pai')
+	if(pai.length > 0){
+		for(var i=0,len = rated || pai.length;i<len;i++){
+			pai[i].querySelector(".biao").style.zIndex = "10";
+			pai[i].style.transform = "rotateZ(" +angleZ(pai[i]) + "deg) rotateY(0deg)"
+			var zn = pai[i].getAttribute('wei') == '正' ? 'z' : 'n';
+			createMark(pai[i].getAttribute('no.'),i,mes.nature,zn)
+
+		}
+	}
+}
+
+</script>
+</html>

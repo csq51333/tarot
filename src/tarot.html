@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="../css/globle.css">
+	<title>tarot</title>
+	<style>
+		#origin{
+			position: relative;
+			width: 0px;
+			height: 0px;
+			border-radius: 10px;
+			background-color: black;
+			/*margin: 200px auto;*/
+		}
+		#origin .start{
+			width: 5rem;
+			height: 3rem;
+			position: absolute;
+			background-color: black;
+			color: white;
+			display: inline-block;
+			border-radius: .5rem;
+			outline: none;
+			transition: 6s;
+		}
+		#origin .start:active{
+			background-color: greenyellow;
+		}
+		#collect{
+			background-color: gray;
+		}
+		#collect > *{
+			width: 5rem;
+			height: 8.7rem;
+			float: left;
+			margin: 10px 10px;
+			border: 1px dotted black;
+			border-radius: 5px;
+			-webkit-background-size: cover;
+			background-size: cover;
+			background-position: center center;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="remark"></div>
+	<div id="collect" class="clearfix"></div>
+	<div id="origin">
+		<button class="start">开始</button>
+	</div>
+
+</body>
+<script src="../js/common.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/contorl.js"></script>
+<script src="../js/TarotArray.js"></script>
+<script>
+var ogn = document.getElementById('origin')
+var clt = document.getElementById('collect')
+var start = document.querySelector('.start')
+var items,lens;
+
+var mes = getParmas(); // 第一页选项信息
+
+//生成收集栏
+~function(){
+	lens = Tarr[mes.formation].total // 共收集多少张牌？后自动跳转
+	for(var i=0;i<lens;i++){
+		var div = document.createElement('div')
+		div.className = 'clt-item'
+		clt.appendChild(div);
+	}
+	start.style.top = redress + start.offsetHeight + "px"
+	start.style.left = redress + "px"
+	items = document.querySelectorAll('.clt-item');
+
+	//摆盘。。。。
+	circle()
+}()
+
+var handle = (function(){
+	var i = 0;
+	return function(e){
+		var el,et = e.target;
+		if((et.className == 'bei' || et.className == 'biao') && i < lens){
+			el = et.parentNode
+			if(canStart){ // canStart是否洗过牌
+				var v = el.getAttribute('wei') //正逆位
+				var n = el.getAttribute('no.') //牌号
+				items[i].setAttribute('wei',v);
+				items[i].setAttribute("No.",n)
+				items[i].style.transform = 'rotateZ(' + (v == '正' ? 0: 180) + 'deg)'
+				if(1){
+					items[i].style.backgroundImage = el.querySelector('.biao').style.backgroundImage;
+				}else{
+					items[i].style.backgroundImage = "url(../img/waite/b.jpg)";
+				}
+				items[i].numbers = n;
+				el.style.display = 'none';
+				i++;
+				if(i == lens){
+					document.removeEventListener('click',handle)
+					redirect()
+				}
+			}
+		}
+	}
+})()
+
+document.addEventListener('click',handle)
+
+function collect(){
+	var obj = []
+	for(var i=0;i<items.length;i++){
+		obj[i] = {};
+		obj[i].direction = items[i].getAttribute('wei') == "正" ? 'positive' : 'reverse'
+		obj[i].No = items[i].numbers
+	}
+	return JSON.stringify(obj)
+}
+
+function redirect(){
+	var _url = './TarotArray.html?data='+collect()+'&formation='+ mes.formation +'&nature='+ mes.nature +'&kind='+ mes.kind +'&Date='+ new Date().getTime() +'&query=' + '输入你的问题'
+	direct(_url)
+}
+
+var timer = null;
+var idx = 0;
+
+//长按开始，到达三秒后松开可触发，越长洗牌次数越多
+start.onmousedown = function(){
+	timer = setInterval(function(){
+		idx++
+		console.log(idx)
+	},1000)
+}
+start.onmouseup = function(){
+	clearInterval(timer)
+	if(idx>1){
+		process(idx-1, mes.self)
+		start.style.display = "none"
+	}else{
+		idx = 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+//index递增值，选满跳转/按钮跳转？，跳转前收集 ----核心的思路？
+
+
+
+
+//关于开发模式，暂时不想整了，没什么意义
+//点击牌翻转事件，兼容？
+document.addEventListener("dblclick",function(e){
+	var el
+	if(e.target.className == 'bei' || e.target.className == 'biao'){
+		el = e.target.parentNode;
+		var b = getRoutate(el.style.transform,'Z')
+		el.reg  = !el.reg ? 180 : 0;
+		el.style.transform = "rotateY("+ el.reg +"deg) rotateZ("+ (b%180 == 0? b:-b) +"deg)"
+		setTimeout(function(){
+			el.zinx = el.zinx == -1 ? 1 : -1;
+			el.querySelector('.bei').style.zIndex = el.zinx
+		},300)
+		console.log(el)
+	}
+});
+</script>
+</html>

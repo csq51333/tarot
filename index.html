@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="css/globle.css">
+	<style>
+		.colls{
+			margin: 20px auto;
+			border: 1px dotted black;
+			border-radius: 10px;
+			padding: 10px;
+			width: 80%;
+			background-color: gray;
+			list-style: none;
+		}
+		.colls .item{
+			height: 2rem;
+			line-height: 2rem;
+			margin: 10px 0;
+			background-color: black;
+			display: flex;
+			padding: .5rem;
+			justify-content: space-between;
+			border-radius: 5px;
+			color: white;
+		}
+		.colls .go{
+			width: 2.5rem;
+			height: 2.5rem;
+			line-height: 2rem;
+			border-radius: 50%;
+			background-color: black;
+			color: white;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.recordBox{
+			width: 100%;
+		}
+		.recordTitle{
+			background-color: gray;
+			color-rendering: red;
+			text-align: center;
+			margin: 10px auto;
+			width: 40%;
+		}
+		.hist{
+			width: 80%;
+			max-height:30rem;
+			overflow-y:auto;
+			margin: 0 auto;
+			padding: 10px;
+			border-radius: 5px;
+			background-color: gray;
+			color: white;
+		}
+		.hist>li{
+			background-color: black;
+			height: 2rem;
+			line-height: 2rem;
+			border-radius: 5px;
+			padding: 0 1rem;
+			margin: 10px 0;
+		}
+		.hist>li>a{
+			display: inline-block;
+			width: 94%;
+		}
+		.problem{
+			float: left;
+			width: 55%;
+		}
+		.recordDate{
+			width: 35%;
+			float: right;
+			text-align: right;
+		}
+		.detele{
+			float: right;
+			width: 5%;
+			height: 100%;
+			text-align: center;
+			cursor: default;
+		}
+		.detele:hover{color:cyan;}
+	</style>
+</head>
+<body>
+	<ul class="colls">
+		<li class="item">
+			<label for="">选牌：</label>
+			<select class="kind" id="">
+				<option value="waite/">韦特塔罗</option>
+				<option value="alchemy/">炼金术师塔罗</option>
+				<option value="hhh/">火柴人塔罗</option>
+			</select>
+		</li>
+		<li class="item">
+			<label for="">选测：</label>
+			<select class="ce" id="">
+				<option value="outline">综合测试</option>
+				<option value="work">工作学业</option>
+				<option value="love">恋情婚姻</option>
+				<option value="health">健康生活</option>
+				<option value="wealth">人际财富</option>
+			</select>
+		</li>
+		<li class="item">
+			<label for="">选阵：</label>
+			<select class="zhen" id="">
+			</select>
+		</li>
+		<li class="item">
+			<label for="">选数：</label>
+			<select class="num" id="">
+				<option value="22">22张大阿卡纳</option>
+				<option value="78">78张全部</option>
+				<option value="56">56张小阿卡纳</option>
+			</select>
+		</li>
+		<li class="item">
+			<label for="">占卜对象：</label>
+			<select class="isSelf" id="">
+				<option value="90">自己</option>
+				<option value="-90">他人</option>
+			</select>
+		</li>
+		<div class="go">go</div>
+	</ul>
+
+	<div class="recordBox">
+		<div class="recordTitle">
+			<h3>歷史記錄</h3>
+		</div>
+		<ul class="hist">
+			
+		</ul>
+	</div>
+</body>
+<script src="js/common.js"></script>
+<script src="js/TarotArray.js"></script>
+<script>
+var go = document.querySelector('.go')
+var ki = document.querySelector('.kind')
+var ce = document.querySelector('.ce')
+var zh = document.querySelector('.zhen')
+var nu = document.querySelector('.num')
+var se = document.querySelector('.isSelf')
+var hist = document.querySelector('.hist')
+var colls = document.querySelector('.colls')
+
+var TarrNo = 0;
+var selec = (function(){
+	var Arr = [];
+	for(x in Tarr){
+		Arr.push(Tarr[x])
+	}
+	return function(){
+		var _idx = ce.selectedIndex;
+		var _tex = ce.options[_idx].text;
+		var reg = RegExp("" + _tex)
+		var fArr = Arr.filter(function(item, index){
+			return reg.test(item.type)
+		})
+		zh.innerHTML = ""
+		fArr.forEach(function(item){
+			var html = '<option value="'+ item.English +'">'+item.Chinese+'</option>'
+			zh.innerHTML += html
+		})
+	}
+})()
+
+for(i in localStorage){
+	if(/Tarot/.test(i)){
+		var obj = JSON.parse(localStorage[i])
+		console.log(obj)
+		var cache = hist.innerHTML;
+		hist.innerHTML = "";
+		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ obj.record +'"><p class="problem ellipsis">'+ obj.remark +'</p><p class="recordDate ellipsis">'+formatTime(obj.date)+'</p></a><span class="detele" data-Id="' + i + '"">x</span></li>';
+		hist.innerHTML += cache
+	}
+}
+go.onclick = function(){
+	var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
+	direct(_url)
+}
+window.onload = selec
+ce.onchange = selec
+function Del(){
+	console.log("1111111")
+	console.log(this)
+}
+document.addEventListener('click',function(e){
+	if(e.target.className == 'detele'){
+		if(confirm("确认删除？") == true){
+			localStorage.removeItem(e.target.dataset.id)
+			e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+		}
+	}
+})
+</script </html>

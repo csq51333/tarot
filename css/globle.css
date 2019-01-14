@@ -1,0 +1,144 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style:none;
+}
+html,body{
+	height: 100%;
+}
+ul,li{
+	list-style: none;
+}
+a{
+	color:inherit;
+	text-decoration: none;
+}
+@keyframes circle{
+	to{transform: 0deg}
+	from{transform: 360deg}
+}
+.pai{
+	width: 5rem;
+	height: 8.6rem;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	box-sizing: border-box;
+	border:1px solid transparent;
+	border-radius: 5px;
+	background-color: cyan;
+	transition: 1s;
+}
+.biao{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transform: rotateY(-180deg);
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.bei{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-image: url('../img/waite/b.jpg');
+	-webkit-background-size: contain;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.clearfix:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+.ellipsis{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 768px){
+	html{
+		font-size: 15px;
+	}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	html{
+		font-size: 12px;
+	}
+}
+
+@media only screen (min-width: 10px) and (max-width: 479px){
+	html{
+		font-size: 11px;
+	}
+}
+
+/*弹框*/
+.popover{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.curtain{
+	background-color: rgba(0,0,0,.3);
+	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+.prompt{
+	/*这里有一个问题，如果prompt没有设置高度，子元素设置百分比依旧可以，为什么？*/
+	width: 45%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	background-color: black;
+	text-align: center;
+	border-radius: 5px;
+	padding: 15px 5px;
+	z-index: 10000;
+}
+.prompt>h3{
+	width: 90%;
+	margin: 10px auto;
+	color: white;
+	text-align: center;
+}
+.prompt>textarea{
+	width: 100%;
+	height: 5rem;
+	margin: 10px 0;
+	resize:none;
+}
+.prompt>img{
+	width: 60%;
+}
+.side{
+	width: 4rem;
+	height: 3rem;
+	line-height: 3rem;
+	background-color: black;
+	position: fixed;
+	text-align: center;
+	border-radius: .2rem;
+	border: 1px solid gray;
+	color: white;
+	right: 0;
+	font-size: .5rem;
+	transition: .5s;
+}
+.side:hover{
+	width: 6rem;
+}

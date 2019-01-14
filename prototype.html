@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>tarot</title>
+	<style>
+		body{
+			background-color: cyan;
+			/*transform-style: preserve-3d;*/
+			/*animation: rote 10s infinite;*/
+		}
+		@keyframes rote{
+			from {transform: rotateY(0deg);}
+			to {transform: rotateY(360deg);}
+		}
+		.gongpai{
+			width: 20vw;
+			height: 36vw;
+			top: 100px;
+			left: 240px;
+			position: absolute;
+			transition: 1s;
+			transform: rotateY(0deg);
+		}
+		.biao{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			transform: rotateY(-180deg);
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url('img/waite/3.jpg');
+			background-color: cyan;
+		}
+		.bei{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			-webkit-background-size: contain;
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url('img/waite/b.jpg');
+			background-color: cyan;
+		}
+	</style>
+</head>
+<body>
+	<div class="gongpai pai">
+		<div class="biao"></div>
+		<div class="bei"></div>
+	</div>
+</body>
+<script>
+var pai = document.querySelector('.pai')
+var bei = document.querySelector('.bei')
+var reg;
+pai.zidx = 1;
+function zhuan(){
+	reg = !reg ? -180 : 0;
+	pai.style.transform = "rotateY("+reg+"deg)"
+	setTimeout(function(){
+		pai.zidx = pai.zidx == -1? 1:-1;
+		bei.style.zIndex = pai.zidx
+	},300)
+}
+window.onresize = function(){
+	console.log(window)
+	console.log(document.body.clientWidth)
+}
+document.addEventListener('click',function(e){
+	if(e.target.className == 'bei' || e.target.className == 'biao'){
+		zhuan()
+	}
+})
+</script>
+</html>
