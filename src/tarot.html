@@ -166,17 +166,15 @@ document.addEventListener("dblclick",function(e){
 		console.log(el)
 	}
 });
+
 function mobile(){
 	var idx = Math.round(Math.random()*5)+2;
-	return function(){
-		if(once){
-			once=false;
-			process(idx-1, mes.self)
-			start.style.display = "none";
-		}
+	if(once){
+		once=false;
+		process(idx-1, mes.self)
+		start.style.display = "none";
 	}
 }
-var handles = mobile();
-document.addEventListener('touchend',handles);
+document.addEventListener('touchend',mobile);
 </script>
 </html>

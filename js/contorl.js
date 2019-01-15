@@ -75,6 +75,7 @@ function messUp(){
 
 //铺开函数
 function unfold(){
+	alert("铺开？？");
 	//横向铺开以z-index为序列
 	var _w = document.body.clientWidth;
 	var cha = 0;
@@ -101,6 +102,7 @@ function cutCard(){
 	var _this = arguments.callee;
 	var lens = len;
 	var x = 0;
+	alert();
 
 	if(i >= 5){
 		return next()
@@ -171,6 +173,7 @@ function cutCard(){
 // 自动洗牌一套动作集合，传参洗几遍，默认3次
 var process = function(n, _ag){
 	var lens = n || 3
+	alert(lens);
 	isSelfAg = parseInt(_ag) || 0;
 	// document.getElementById('origin').style.animation = "circle "+i+"s linear"
 	for(var i=0;i<lens;i++){
@@ -187,6 +190,7 @@ var process = function(n, _ag){
 }
 
 function next(){
+	alert("下一步？？");
 	for(var i=0;i<len;i++){
 		var _redress = getRoutate(pArr[i].style.transform,'Z');
 		var _ag = isSelfAg + _redress // 为自己占卜加90度 ，为他人占卜减90度,90从首页信息选择来还是按钮选择？
