@@ -97,10 +97,14 @@ function mask(obj){
 
 		switch(obj.content){
 			case "text":
-				prompt.innerHTML = "<h3>"+ arg.title +"</h3><textarea class='_mark'></textarea><button class='btn'>"+ arg.btn +"</button>"
+				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3><textarea class='_mark'></textarea><button class='btn'>"+ arg.btn +"</button>"
 				break;
 			case "img" :
-				prompt.innerHTML = "<h3>"+ arg.title +"</h3><img class='img_mark' src='"+obj.imgSrc+"' />"
+				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3><img class='img_mark' src='"+obj.imgSrc+"' />"
+				break;
+			case "load":
+				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3>"
+				break;
 		}
 		
 		po.style.display = 'block'
