@@ -195,7 +195,7 @@ function next(){
 		var _ag = isSelfAg + _redress // 为自己占卜加90度 ，为他人占卜减90度,90从首页信息选择来还是按钮选择？
 		pArr[i].style.transform = 'rotateZ(' + _ag + 'deg)'
 	}
-	alert("长度："+len" ，角度:"+_ag);
+	alert("长度："+len+" ，角度:"+_ag);
 	setTimeout(function(){
 		unfold()
 		canStart = true;
