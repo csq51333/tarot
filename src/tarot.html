@@ -146,6 +146,21 @@ start.onmouseup = function(){
 		idx = 0;
 	}
 }
+start.touchstart = function(){
+	timer = setInterval(function(){
+		idx++;
+	},1000)
+}
+start.touchend = function(){
+	clearInterval(timer)
+	if(idx>1){
+		process(idx-1, mes.self)
+		start.style.display = "none"
+	}else{
+		idx = 0;
+		confirm("请在心中默念你想占卜的问题，并长按三秒以上")
+	}
+}
 
 //index递增值，选满跳转/按钮跳转？，跳转前收集
 
