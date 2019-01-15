@@ -76,6 +76,7 @@ function messUp(){
 //铺开函数
 function unfold(){
 	//横向铺开以z-index为序列
+	aler('铺开函数开始');
 	var _w = document.body.clientWidth;
 	var cha = 0;
 	for(var i=0;i<len;i++){
@@ -91,6 +92,7 @@ function unfold(){
 		pArr[i].setAttribute('wei',(zn % 360 == 180 ? '逆' : '正'))
 		pArr[i].wei = (zn == 180 ? '逆' : '正')
 	}
+	aler('铺开函数完毕');
 }
 
 //切三叠牌，再也不要用递归这种蛋疼玩意儿来写了....
@@ -188,13 +190,12 @@ var process = function(n, _ag){
 }
 
 function next(){
-	alert("下一步："+len);
 	for(var i=0;i<len;i++){
 		var _redress = getRoutate(pArr[i].style.transform,'Z');
 		var _ag = isSelfAg + _redress // 为自己占卜加90度 ，为他人占卜减90度,90从首页信息选择来还是按钮选择？
 		pArr[i].style.transform = 'rotateZ(' + _ag + 'deg)'
 	}
-
+	alert("长度："+len" ，角度:"+_ag);
 	setTimeout(function(){
 		unfold()
 		canStart = true;
