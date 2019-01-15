@@ -76,7 +76,7 @@ function messUp(){
 //铺开函数
 function unfold(){
 	//横向铺开以z-index为序列
-	aler('铺开函数开始');
+	alert('铺开函数开始');
 	var _w = document.body.clientWidth;
 	var cha = 0;
 	for(var i=0;i<len;i++){
@@ -92,7 +92,7 @@ function unfold(){
 		pArr[i].setAttribute('wei',(zn % 360 == 180 ? '逆' : '正'))
 		pArr[i].wei = (zn == 180 ? '逆' : '正')
 	}
-	aler('铺开函数完毕');
+	alert('铺开函数完毕');
 }
 
 //切三叠牌，再也不要用递归这种蛋疼玩意儿来写了....
