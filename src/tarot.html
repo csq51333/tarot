@@ -95,7 +95,7 @@ var handle = (function(){
 				if(1){
 					items[i].style.backgroundImage = el.querySelector('.biao').style.backgroundImage;
 				}else{
-					items[i].style.backgroundImage = "url(../img/waite/b.jpg)";
+					items[i].style.backgroundImage = "url(../img/waite/78.jpg)";
 				}
 				items[i].numbers = n;
 				el.style.display = 'none';
@@ -146,21 +146,8 @@ start.onmouseup = function(){
 	}
 }
 
+//index递增值，选满跳转/按钮跳转？，跳转前收集
 
-
-
-
-
-
-
-
-
-//index递增值，选满跳转/按钮跳转？，跳转前收集 ----核心的思路？
-
-
-
-
-//关于开发模式，暂时不想整了，没什么意义
 //点击牌翻转事件，兼容？
 document.addEventListener("dblclick",function(e){
 	var el
@@ -170,7 +157,7 @@ document.addEventListener("dblclick",function(e){
 		el.reg  = !el.reg ? 180 : 0;
 		el.style.transform = "rotateY("+ el.reg +"deg) rotateZ("+ (b%180 == 0? b:-b) +"deg)"
 		setTimeout(function(){
-			el.zinx = el.zinx == -1 ? 1 : -1;
+			el.zinx *= -1;
 			el.querySelector('.bei').style.zIndex = el.zinx
 		},300)
 		console.log(el)

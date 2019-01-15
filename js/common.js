@@ -69,7 +69,7 @@ function createPai(father,i,wei,kinds){
 	divb.style.backgroundImage = 'url("../img/'+kind+i+'.jpg")'
 
 	divbg.className = 'bei'
-	divbg.style.backgroundImage = 'url("../img/'+kind+'b.jpg")'
+	divbg.style.backgroundImage = 'url("../img/'+kind+'78.jpg")'
 	div.appendChild(divb)
 	div.appendChild(divbg)
 	father.appendChild(div)
@@ -151,4 +151,11 @@ function direct(url){
 		sessionStorage.setItem('backUrl',(window.location.href).match(/(?<=\w*\/)\w*(?=\.html)/))
 	}
 	return sessionStorage.getItem('backUrl');
+}
+
+function singleAlert(){
+	var result = "";
+	return function (kind){
+		// 单例弹框，mask块/内容块
+	}
 }

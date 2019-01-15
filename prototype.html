@@ -62,7 +62,7 @@ function zhuan(){
 	reg = !reg ? -180 : 0;
 	pai.style.transform = "rotateY("+reg+"deg)"
 	setTimeout(function(){
-		pai.zidx = pai.zidx == -1? 1:-1;
+		pai.zidx *= -1;
 		bei.style.zIndex = pai.zidx
 	},300)
 }

@@ -149,14 +149,17 @@ var nu = document.querySelector('.num')
 var se = document.querySelector('.isSelf')
 var hist = document.querySelector('.hist')
 var colls = document.querySelector('.colls')
+var isCanGo = false;
 
 var TarrNo = 0;
+var preLoad = preImg(79);
 var selec = (function(){
 	var Arr = [];
 	for(x in Tarr){
 		Arr.push(Tarr[x])
 	}
 	return function(){
+		preLoad('waite/');
 		var _idx = ce.selectedIndex;
 		var _tex = ce.options[_idx].text;
 		var reg = RegExp("" + _tex)
@@ -181,9 +184,24 @@ for(i in localStorage){
 		hist.innerHTML += cache
 	}
 }
+ki.onchange = function(){
+	var currentVal = ki.value;
+	isCanGo = false;
+	console.log(currentVal);
+	preLoad(currentVal);
+	
+}
 go.onclick = function(){
-	var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
-	direct(_url)
+	if(isCanGo){
+		var _url = "src/tarot.html?nature="+ce.value+"&formation="+zh.value+"&total="+nu.value+"&kind=" + ki.value + "&self=" + se.value
+		direct(_url)
+	}else{
+		mask({
+			title:"加载图中",
+			content:'load',
+			callback:function(){}
+		})
+	}
 }
 window.onload = selec
 ce.onchange = selec
@@ -199,4 +217,25 @@ document.addEventListener('click',function(e){
 		}
 	}
 })
-</script </html>
+
+function preImg(num){
+	var sum = num || 0;
+	var imgArr = [];
+	return function(kind){
+		var _count = 0;
+		for(var i=0;i<sum;i++){
+			console.log();
+			imgArr[i] = new Image();
+			imgArr[i].onload = function(){
+				_count++;
+				console.log(_count);
+				if (_count == sum) {
+					isCanGo = true;
+				}
+			}
+			imgArr[i].src = './img/'+kind+i+'.jpg'
+		}
+	}
+}
+</script>
+</html>
