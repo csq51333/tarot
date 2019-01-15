@@ -61,6 +61,7 @@
 var ogn = document.getElementById('origin')
 var clt = document.getElementById('collect')
 var start = document.querySelector('.start')
+var once = true;
 var items,lens;
 
 var mes = getParmas(); // 第一页选项信息
@@ -132,6 +133,7 @@ var idx = 0;
 
 //长按开始，到达三秒后松开可触发，越长洗牌次数越多
 start.onmousedown = function(){
+	once = false;
 	timer = setInterval(function(){
 		idx++
 		console.log(idx)
@@ -144,21 +146,6 @@ start.onmouseup = function(){
 		start.style.display = "none"
 	}else{
 		idx = 0;
-	}
-}
-start.touchstart = function(){
-	timer = setInterval(function(){
-		idx++;
-	},1000)
-}
-start.touchend = function(){
-	clearInterval(timer)
-	if(idx>1){
-		process(idx-1, mes.self)
-		start.style.display = "none"
-	}else{
-		idx = 0;
-		confirm("请在心中默念你想占卜的问题，并长按三秒以上")
 	}
 }
 
@@ -179,5 +166,17 @@ document.addEventListener("dblclick",function(e){
 		console.log(el)
 	}
 });
+function mobile(){
+	var idx = Math.round(Math.random()*5)+2;
+	return function(){
+		if(once){
+			once=false;
+			process(idx-1, mes.self)
+			start.style.display = "none";
+		}
+	}
+}
+var handles = mobile();
+document.addEventListener('click',handles);
 </script>
 </html>
