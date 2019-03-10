@@ -142,9 +142,18 @@ function formatTime(n){
 		var Minute = T.getMinutes()
 		var Second = T.getSeconds()
 
-		return Year+"."+Month+"."+Dates+" "+Hours+":"+Minute+":"+Second+" "
+		return Year+"."+tenStr(Month)+"."+tenStr(Dates)+" "+tenStr(Hours)+":"+tenStr(Minute)+":"+tenStr(Second)+" "
 	}
 	return "？？？"
+}
+
+// 3.5号格式--03.05
+function tenStr(n){
+	n = parseInt(n);
+	if (n >= 10) 
+		return n;
+	else
+		return '0'+n
 }
 
 function direct(url){
