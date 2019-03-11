@@ -4,19 +4,19 @@ var Tarr = {
 			x:25,
 			y:30,
 			ag:0,
-			conte:"过去的经验"
+			conte:"1.过去的经验"
 		},
 		1:{
 			x:10,
 			y:10,
 			ag:0,
-			conte:"问题的现状"
+			conte:"2.问题的现状"
 		},
 		2:{
 			x:40,
 			y:10,
 			ag:0,
-			conte:"预测的结果"
+			conte:"3.预测的结果"
 		},
 		Chinese:"圣三角牌阵",
 		English:"three",
@@ -30,61 +30,61 @@ var Tarr = {
 			y:20,
 			x:20,
 			ag:0,
-			conte: "现状"
+			conte: "1.现状"
 		},
 		1:{
 			y:21,
 			x:21,
 			ag:90,
-			conte: "障碍"
+			conte: "2.障碍"
 		},
 		2:{
 			y:0,
 			x:20,
 			ag:0,
-			conte: "理想"
+			conte: "3.理想"
 		},
 		3:{
 			y:40,
 			x:20,
 			ag:0,
-			conte: "基础"
+			conte: "4.基础"
 		},
 		4:{
 			y:20,
 			x:0,
 			ag:0,
-			conte: "不久"
+			conte: "5.不久"
 		},
 		5:{
 			y:20,
 			x:40,
 			ag:0,
-			conte: "将来"
+			conte: "6.将来"
 		},
 		6:{
 			y:48,
 			x:55,
 			ag:30,
-			conte: "自我"
+			conte: "7.自我"
 		},
 		7:{
 			y:32,
 			x:55,
 			ag:30,
-			conte: "环境"
+			conte: "8.环境"
 		},
 		8:{
 			y:16,
 			x:55,
 			ag:30,
-			conte: "预期"
+			conte: "9.预期"
 		},
 		9:{
 			y:0,
 			x:55,
 			ag:30,
-			conte: "结果"
+			conte: "10.结果"
 		},
 		Chinese:"凯尔特十字牌阵",
 		English:"kerte",
@@ -98,31 +98,31 @@ var Tarr = {
 			x:25,
 			y:10,
 			ag:0,
-			conte:"心态"
+			conte:"1.心态"
 		},
 		1:{
 			x:25,
 			y:50,
 			ag:0,
-			conte:"现状"
+			conte:"2.现状"
 		},
 		2:{
 			x:15,
 			y:30,
 			ag:0,
-			conte:"举措"
+			conte:"3.举措"
 		},
 		3:{
 			x:35,
 			y:30,
 			ag:0,
-			conte:"环境"
+			conte:"4.环境"
 		},
 		4:{
 			x:25,
 			y:30,
 			ag:0,
-			conte:"未来"
+			conte:"5.未来"
 		},
 		5:{
 			x:5,
