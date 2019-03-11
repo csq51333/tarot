@@ -17,11 +17,11 @@
 		},
 		create:function(obj){
 			//生成78，56，22？
-			var i = obj.total != 56? 0 : 23;
-			var len = obj.total != 56? obj.total : obj.total + 23
+			var i = obj.total != 56? 0 : 22;
+			var len = obj.total != 22 ? 78 : 22;
 			var ogn = document.getElementById('origin');
 			var kind = obj.kind
-			for(i;i<obj.total;i++){
+			for(i;i<len;i++){
 				createPai(ogn,i,'positive',kind)
 			}
 
