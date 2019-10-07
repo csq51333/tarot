@@ -11,8 +11,9 @@
 			// 	kind:'waite/'
 			// }
 			var paiClass = obj.paiClass;
-
-
+			if (!IsPC()) {
+				document.documentElement.style.fontSize = '13px'
+			}
 			this.create(obj)
 		},
 		create:function(obj){

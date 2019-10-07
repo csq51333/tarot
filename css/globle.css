@@ -126,7 +126,7 @@ a{
 	width: 60%;
 }
 .side{
-	width: 4rem;
+	width: 6rem;
 	height: 3rem;
 	line-height: 3rem;
 	background-color: black;
@@ -136,7 +136,7 @@ a{
 	border: 1px solid gray;
 	color: white;
 	right: 0;
-	font-size: .5rem;
+	font-size: 1rem;
 	transition: .5s;
 }
 .side:hover{

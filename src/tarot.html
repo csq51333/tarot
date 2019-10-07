@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../css/globle.css">
 	<title>tarot</title>
 	<style>
+		.wrap{
+			min-height: 800px;
+			height: 100%;
+			background-image: url('../img/bg.png');
+			background-position: 50% 50%;
+			background-size: cover;
+			background-repeat: no-repeat;
+			color: rgba(255, 255, 255, .5);
+		}
 		#origin{
 			position: relative;
 			width: 0px;
 			height: 0px;
 			border-radius: 10px;
 			background-color: black;
-			/*margin: 200px auto;*/
+			margin: 12rem auto 0;
 		}
 		#origin .start{
 			width: 5rem;
@@ -24,34 +34,47 @@
 			outline: none;
 			transition: 6s;
 			user-select: none;
+			font-size: 1rem;
 		}
 		#origin .start:active{
 			background-color: greenyellow;
 		}
 		#collect{
-			background-color: gray;
+			background-color: rgba(0,0,0,.5);
+			/*background-color: grey;*/
+			text-align: center;
 		}
 		#collect > *{
 			width: 5rem;
 			height: 8.7rem;
-			float: left;
+			display: inline-block;
+			vertical-align: top;
 			margin: 10px 10px;
-			border: 1px dotted black;
+			border: 1px dotted white;
 			border-radius: 5px;
 			-webkit-background-size: cover;
 			background-size: cover;
 			background-position: center center;
 		}
-		
+		.remark{
+			text-align: center;
+			font-size: 1rem;
+		}
+		.clt-item{
+			text-align: center;
+			padding-top: 3.2rem;
+			box-sizing: border-box;
+		}
 	</style>
 </head>
 <body>
-	<div id="remark"></div>
-	<div id="collect" class="clearfix"></div>
-	<div id="origin">
-		<button class="start">开始</button>
+	<div class="wrap">
+		<div class="remark">长按“开始”并在心里默念自己的问题，任意时间松开后自动洗牌</div>
+		<div id="collect" class="clearfix"></div>
+		<div id="origin">
+			<button class="start">开始</button>
+		</div>
 	</div>
-
 </body>
 <script src="../js/common.js"></script>
 <script src="../js/main.js"></script>
@@ -72,10 +95,10 @@ var mes = getParmas(); // 第一页选项信息
 	for(var i=0;i<lens;i++){
 		var div = document.createElement('div')
 		div.className = 'clt-item'
+		div.innerHTML = Tarr[mes.formation][i].conte
 		clt.appendChild(div);
 	}
-	start.style.top = redress + start.offsetHeight + "px"
-	start.style.left = redress + "px"
+	start.style.top = start.offsetHeight + "px"
 	items = document.querySelectorAll('.clt-item');
 
 	//摆盘。。。。
@@ -86,6 +109,7 @@ var handle = (function(){
 	var i = 0;
 	return function(e){
 		var el,et = e.target;
+		var isDev = false // 是否可以直接观看牌
 		if((et.className == 'bei' || et.className == 'biao') && i < lens){
 			el = et.parentNode
 			if(canStart){ // canStart是否洗过牌
@@ -94,9 +118,10 @@ var handle = (function(){
 				items[i].setAttribute('wei',v);
 				items[i].setAttribute("No.",n)
 				items[i].style.transform = 'rotateZ(' + (v == '正' ? 0: 180) + 'deg)'
-				if(1){
+				if(isDev){
 					items[i].style.backgroundImage = el.querySelector('.biao').style.backgroundImage;
 				}else{
+					items[i].innerHTML = '';
 					items[i].style.backgroundImage = "url(../img/waite/78.jpg)";
 				}
 				items[i].numbers = n;
@@ -141,6 +166,7 @@ start.onmousedown = function(){
 }
 start.onmouseup = function(){
 	clearInterval(timer)
+	idx = idx > 10 ? 10 : idx
 	if(idx>1){
 		process(idx-1, mes.self)
 		start.style.display = "none"

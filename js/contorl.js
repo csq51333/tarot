@@ -1,6 +1,8 @@
 var cw = document.body.clientWidth;//屏幕宽度，兼容不写
 var ch = document.body.clientHeight;//屏幕宽度，懒得管兼容
-var redress = cw > ch ? ch/3 : cw/3 //矫正值，为了居中
+var eccent = IsPC() ? 9 : 3
+var radius = IsPC() ? 150 : 120
+var redress = cw > ch ? ch/eccent : cw/eccent //矫正值，为了居中
 
 var pArr = document.querySelectorAll('.pai');
 var len = pArr.length;
@@ -15,8 +17,8 @@ function rd(min,max){
 // 返回一个圆圈坐标
 function coordinate(angle){
 	var ag = angle*Math.PI/180;
-	var left = Math.sin(ag)*150
-	var top = Math.cos(ag)*150//距离圆心的半径长
+	var left = Math.sin(ag)*radius
+	var top = Math.cos(ag)*radius//距离圆心的半径长
 	return {
 		x: left,
 		y: top
@@ -30,8 +32,8 @@ function circle(){
 			var ag = 360/len*i;
 			var left = coordinate(ag).x;
 			var top = coordinate(ag).y;
-			pArr[i].style.left = left + redress + 'px';
-			pArr[i].style.top = top + redress + 'px';
+			pArr[i].style.left = left + 'px';
+			pArr[i].style.top = top + 'px';
 			pArr[i].style.transform = 'rotateZ('+ -ag +'deg)';
 			pArr[i].style.zIndex = i;
 		}(i)
@@ -42,8 +44,8 @@ function circle(){
 function shuffle(){
 	for(var i = 0; i<len;i++){
 		var _redress = angleZ(pArr[i])
-		pArr[i].style.top = rd(-200,200) + redress + 'px';
-		pArr[i].style.left = rd(-200,200) + redress + 'px';
+		pArr[i].style.top = rd(-200,200) + 'px';
+		pArr[i].style.left = rd(-200,200) + 'px';
 		pArr[i].style.transform = 'rotateZ(' + (rd(0,360) + _redress) + 'deg)'
 	}
 	messUp()
@@ -52,8 +54,8 @@ function shuffle(){
 //横向合牌,加任意参数是竖向合拍（其实由ZNWei函数决定）
 function fold(s){
 	for(var i = 0; i<len;i++){
-		pArr[i].style.top = redress + 'px';
-		pArr[i].style.left = redress + 'px';
+		pArr[i].style.top = '0px';
+		pArr[i].style.left = '0px';
 		var ag = angleZ(pArr[i])
 		var zn = ZNWei(ag,s) //规整函数，要么竖着要么横
 		pArr[i].style.transform = 'rotateZ(' + zn + 'deg)'
@@ -77,13 +79,14 @@ function messUp(){
 function unfold(){
 	//横向铺开以z-index为序列
 	var _w = document.body.clientWidth;
+	document.getElementById('origin').style.marginTop = '10px'
 	var cha = 0;
 	for(var i=0;i<len;i++){
 		var T = ch/8 //将屏幕高度分成四份，决定每行上下间距
-		var f = (len*30/cw) + .5 //以左右间距30铺开，得出能份成几行
+		var f = (len*50/cw) + .4 //以左右间距30铺开，得出能份成几行
 		var c = parseInt(len/f) //每一行有多少张？
 		pArr[i].style.top = parseInt(pArr[i].style.zIndex/c) * T + 'px';
-		pArr[i].style.left = (pArr[i].style.zIndex%c)*30 + 'px';
+		pArr[i].style.left = (pArr[i].style.zIndex%c)*50 - cw/2 + 20 + 'px';
 		
 		var ag = angleZ(pArr[i])
 		var zn = ZNWei(ag,'s')
@@ -101,6 +104,7 @@ function cutCard(){
 	var _this = arguments.callee;
 	var lens = len;
 	var x = 0;
+	var val = IsPC() ? 100 : 150
 
 	if(i >= 5){
 		return next()
@@ -108,7 +112,7 @@ function cutCard(){
 
 	//操作地图
 	var map = {
-		top: [100,-100,100,-100,0],
+		top: [val,-val,val,-val,0],
 		run: ['fen','fen','he','he','zo'],
 		cun:[0]
 	}
@@ -143,7 +147,7 @@ function cutCard(){
 				switch(map.run[i]){
 					case 'fen':
 						if(style.zIndex >= rand){
-							style.top = map.top[i] + redress + 'px'
+							style.top = map.top[i] + 'px'
 						}
 						break;
 					case 'he':
@@ -151,12 +155,12 @@ function cutCard(){
 							if(style.zIndex >= start && style.zIndex < rand){
 								style.zIndex = parseInt(style.zIndex) + x;
 							}
-							style.top = map.top[i] + redress + 'px'
+							style.top = map.top[i] + 'px'
 						}
 						break;
 					case 'zo':
 						style.zIndex -= map.cun[2]; // zIndex对铺开效果有影响，所以复位
-						style.top = redress + 'px'
+						style.top = '0px'
 				}
 				
 			}

@@ -20,10 +20,54 @@ var Tarr = {
 		},
 		Chinese:"圣三角牌阵",
 		English:"three",
-		type:"综合测试工作学业健康生活人际财富",
+		type:"工作学业健康生活人际财富",
 		array: "../img/card-array/three.jpg",
 		rated: 3,
 		total: 3
+	},
+	Horseshoe:{
+		0:{
+			x:25,
+			y:50,
+			ag:0,
+			conte:"切牌"
+		},
+		1:{
+			x:10,
+			y:50,
+			ag:0,
+			conte:"1.现状"
+		},
+		2:{
+			x:10,
+			y:30,
+			ag:0,
+			conte:"2.可预知的"
+		},
+		3:{
+			x:25,
+			y:10,
+			ag:0,
+			conte:"3.不可预知的"
+		},
+		4:{
+			x:40,
+			y:30,
+			ag:0,
+			conte:"4.即将发生的"
+		},
+		5:{
+			x:40,
+			y:50,
+			ag:0,
+			conte:"5.结果"
+		},
+		Chinese:"处境马蹄牌阵",
+		English:"Horseshoe",
+		type:"恋情婚姻工作学业健康生活人际财富",
+		array: "",
+		rated: 6,
+		total: 6
 	},
 	kerte:{
 		0:{
@@ -92,6 +136,50 @@ var Tarr = {
 		array: "../img/card-array/kerte.jpg",
 		rated: 10,
 		total: 10
+	},
+	Inspiration:{
+		0:{
+			x:10,
+			y:10,
+			ag:0,
+			conte:"1.你对对方的看法"
+		},
+		1:{
+			x:10,
+			y:30,
+			ag:0,
+			conte:"2.对方对你的看法"
+		},
+		2:{
+			x:25,
+			y:10,
+			ag:0,
+			conte:"3.你认为目前的关系"
+		},
+		3:{
+			x:25,
+			y:30,
+			ag:0,
+			conte:"4.对方认为目前的关系"
+		},
+		4:{
+			x:40,
+			y:10,
+			ag:0,
+			conte:"5.你期望将来的发展"
+		},
+		5:{
+			x:40,
+			y:30,
+			ag:0,
+			conte:"6.对方期望将来的发展"
+		},
+		Chinese:"灵感对应局牌阵",
+		English:"Inspiration",
+		type: "恋情婚姻人际财富",
+		array: "",
+		rated: 10,
+		total: 6
 	},
 	Gypsy:{
 		0:{
@@ -188,10 +276,101 @@ var Tarr = {
 		English:"Gypsy",
 		type:"恋情婚姻",
 		array: "../img/card-array/Gypsy.gif",
-		rated: 5,
-		total: 15
+		rated: 5, // 实际测试牌
+		total: 15 // 牌阵需要牌数
+	},
+	week:{
+		0:{
+			x:0,
+			y:10,
+			ag:0,
+			conte:"1.周一上午"
+		},
+		1:{
+			x:10,
+			y:10,
+			ag:0,
+			conte:"2.周二上午"
+		},
+		2:{
+			x:20,
+			y:10,
+			ag:0,
+			conte:"3.周三上午"
+		},
+		3:{
+			x:30,
+			y:10,
+			ag:0,
+			conte:"4.周四上午"
+		},
+		4:{
+			x:40,
+			y:10,
+			ag:0,
+			conte:"5.周五上午"
+		},
+		5:{
+			x:50,
+			y:10,
+			ag:0,
+			conte:"6.周六上午"
+		},
+		6:{
+			x:60,
+			y:10,
+			ag:0,
+			conte:"7.周日上午"
+		},
+		7:{
+			x:0,
+			y:30,
+			ag:0,
+			conte:"8.周一下午"
+		},
+		8:{
+			x:10,
+			y:30,
+			ag:0,
+			conte:"9.周二下午"
+		},
+		9:{
+			x:20,
+			y:30,
+			ag:0,
+			conte:"10.周三下午"
+		},
+		10:{
+			x:30,
+			y:30,
+			ag:0,
+			conte:"11.周四下午"
+		},
+		11:{
+			x:40,
+			y:30,
+			ag:0,
+			conte:"12.周五下午"
+		},
+		12:{
+			x:50,
+			y:30,
+			ag:0,
+			conte:"13.周六下午"
+		},
+		13:{
+			x:60,
+			y:30,
+			ag:0,
+			conte:"14.周日下午"
+		},
+		Chinese:"一周运势牌阵",
+		English:"week",
+		type:"综合测试恋情婚姻工作学业健康生活人际财富",
+		array: "",
+		rated: 14,
+		total: 14
 	}
-
 }
 
 var compare = {

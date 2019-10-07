@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>塔罗学习</title>
+	<link rel="stylesheet" href="../css/globle.css">
+	<style>
+		.pai{
+			position: relative;
+			display: inline-block;
+			margin: 10px;
+			left: auto;
+			top: auto;
+		}
+		.pai > .bei {
+			display: none;
+		}
+		.back{
+			top: 15rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="origin"></div>
+	</div>
+	<div class="back side">返回首页</div>
+</body>
+<script src="../js/common.js"></script>
+<script>
+var back = document.querySelector('.back')
+
+function init(){
+	var i = 0, len = 78
+	var ogn = document.getElementById('origin');
+	var kind = 'waite/'
+	for(i;i<len;i++){
+		createPai(ogn,i,'positive',kind)
+	}
+}
+init()
+
+document.addEventListener('click', function (e) {
+	if(e.target.className == 'biao'){
+		var el = e.target.parentNode
+		var numbers = el.getAttribute('no.')
+		var _url = 'detail.html?No='+numbers+"&kind=waite/"
+		direct(_url)
+	}
+})
+
+back.onclick = function(){
+	direct('../index.html')
+}
+</script>
+</html>

@@ -1,3 +1,18 @@
+function IsPC() {
+   var userAgentInfo = navigator.userAgent;
+   var Agents = ["Android", "iPhone",
+      "SymbianOS", "Windows Phone",
+      "iPad", "iPod"];
+   var flag = true;
+   for (var v = 0; v < Agents.length; v++) {
+      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+         flag = false;
+         break;
+      }
+   }
+   return flag;
+}
+
 function getParmas(){
 	var parmas = {}
 	var search = unescape(window.location.search.substr(1))
@@ -100,7 +115,7 @@ function mask(obj){
 				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3><textarea class='_mark'></textarea><button class='btn'>"+ arg.btn +"</button>"
 				break;
 			case "img" :
-				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3><img class='img_mark' src='"+obj.imgSrc+"' />"
+				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +(obj.imgSrc ? "</h3><img class='img_mark' src='"+obj.imgSrc+"' />" : "<h3>請按照指定順序翻開</h3>")
 				break;
 			case "load":
 				prompt.innerHTML = "<h3 style='color:white'>"+ arg.title +"</h3>"
@@ -164,11 +179,4 @@ function direct(url){
 		sessionStorage.setItem('backUrl',(window.location.href).match(/(?<=\w*\/)\w*(?=\.html)/))
 	}
 	return sessionStorage.getItem('backUrl');
-}
-
-function singleAlert(){
-	var result = "";
-	return function (kind){
-		// 单例弹框，mask块/内容块
-	}
 }

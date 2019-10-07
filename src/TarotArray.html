@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="../css/globle.css">
 	<title>牌阵页</title>
 	<style>
+		.wrap{
+			min-height: 800px;
+			height: 100%;
+			background-image: url('../img/bg1.jpg');
+			background-position: 50% 50%;
+			background-size: cover;
+			background-repeat: no-repeat;
+			color: rgba(255, 255, 255, .5);
+		}
 		.hearder{
 			text-align: center;
 			height: 5rem;
@@ -12,8 +22,6 @@
 			color: white;
 		}
 		.hearder:hover .remarks{
-			position: absolute;
-			z-index: 1000;
 			display: block;
 		}
 		.current{
@@ -35,7 +43,6 @@
 		.caption{
 			width: 100%;
 			background-color: gray;
-			height: 1.5rem;
 			line-height: 20px;
 			text-align: center;
 			font-size: 1rem;
@@ -46,6 +53,8 @@
 		.remarks{
 			width: 60%;
 			padding: 0.5rem;
+			position: absolute;
+			z-index: 1000;
 			background-color: greenyellow;
 			display: none;
 		}
@@ -66,11 +75,14 @@
 		}
 		.mark>p>span{color: red}
 		
-		.save{
-			top: 18rem;
-		}
 		.back{
 			top: 15rem;
+		}
+		.save{
+			top: 19rem;
+		}
+		.result{
+			top: 23rem;
 		}
 	</style>
 </head>
@@ -85,6 +97,7 @@
 
 	<div class="save side">保存记录</div>
 	<div class="back side">返回首页</div>
+	<div class="result side">测试结果</div>
 </body>
 <script src="../js/truth.js"></script>
 <script src="../js/common.js"></script>
@@ -96,9 +109,15 @@ var current = document.querySelector('.current')
 var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
 var back = document.querySelector('.back')
+var result = document.querySelector('.result')
 var mes = getParmas() // 信息
 var backUrl = sessionStorage.getItem('backUrl')
 var rated = Tarr[mes.formation].rated
+
+if (!IsPC()) {
+	zhen.style.marginTop = '200px'
+	document.documentElement.style.fontSize = '13px'
+}
 
 var login = {
 	data:{},
@@ -122,8 +141,13 @@ var login = {
 
 			var box = document.createElement("div");
 			box.className = 'box'
-			box.style.top = Arrays.y + 'vw'
-			box.style.left = Arrays.x + 'vw'
+			if (!IsPC()) {
+				box.style.top = Arrays.y/2 - 8 + 'rem'
+				box.style.left = Arrays.x/2 - 6 + 'rem'
+			} else {
+				box.style.top = Arrays.y + 5 + 'vw'
+				box.style.left = Arrays.x - 10 + 'vw'
+			}
 			box.style.transform = 'rotate('+ Arrays.ag +'deg)'
 			box.setAttribute('order',i)//牌的位置序号
 
@@ -131,9 +155,9 @@ var login = {
 
 			var p = document.createElement('p');
 			p.className = 'caption';
-			p.innerHTML = Arrays.conte
+			p.innerHTML = Arrays.conte;
 			box.appendChild(p);
-			document.querySelector('.zhen').appendChild(box)
+			document.querySelector('.zhen').appendChild(box);
 		}
 	}
 }
@@ -149,11 +173,11 @@ function createMark(idx,odr,type,zn){
 
 	var lineUp = Tarr[mes.formation] // 牌阵对象
 
-	current.innerHTML = "当前阵位："+ lineUp[odr].conte //导航提示信息
+	current.innerHTML = compare[type]+"测试，当前阵位："+ lineUp[odr].conte //导航提示信息
 	var li = document.createElement('li');
 	li.className = "mark";
 	var r = rd(0,200), g = rd(0,180), b = rd(0,200);
-	li.innerHTML = "<h2>"+compare[type]+"方面，关于"+lineUp[odr].conte+"：</h2></p>" + truth[idx][type][zn];
+	li.innerHTML = "<h2>"+lineUp[odr].conte+"：</h2>" + truth[idx][type][zn];
 	li.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
 	document.querySelectorAll('.box')[odr].querySelector('.caption').style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
 	markBox.appendChild(li)
@@ -238,6 +262,14 @@ save.onclick = function(){
 
 back.onclick = function(){
 	direct('../index.html')
+}
+
+result.onclick = function(){
+	if (markBox.style.display == 'block') {
+		markBox.style.display = 'none'
+	} else {
+		markBox.style.display = 'block'
+	}
 }
 
 function isSave(checks){

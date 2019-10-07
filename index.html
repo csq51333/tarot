@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>首页</title>
 	<link rel="stylesheet" href="css/globle.css">
 	<style>
 		.colls{
-			margin: 20px auto;
+			margin: 2rem auto;
 			border: 1px dotted black;
 			border-radius: 10px;
-			padding: 10px;
+			padding: .5rem;
 			width: 80%;
 			background-color: gray;
 			list-style: none;
@@ -24,6 +25,7 @@
 			justify-content: space-between;
 			border-radius: 5px;
 			color: white;
+			font-size: 1rem;
 		}
 		.colls .go{
 			width: 2.5rem;
@@ -50,7 +52,7 @@
 			max-height:30rem;
 			overflow-y:auto;
 			margin: 0 auto;
-			padding: 10px;
+			padding: .5rem;
 			border-radius: 5px;
 			background-color: gray;
 			color: white;
@@ -84,6 +86,9 @@
 			cursor: default;
 		}
 		.detele:hover{color:cyan;}
+		select {
+			font-size: 1rem;
+		}
 	</style>
 </head>
 <body>
@@ -131,7 +136,7 @@
 
 	<div class="recordBox">
 		<div class="recordTitle">
-			<h3>歷史記錄</h3>
+			<h3>历史记录</h3>
 		</div>
 		<ul class="hist">
 			
@@ -152,6 +157,9 @@ var colls = document.querySelector('.colls')
 var isCanGo = false;
 
 var TarrNo = 0;
+if (!IsPC()) {
+	document.documentElement.style.fontSize = '15px'
+}
 var preLoad = preImg(79);
 var selec = (function(){
 	var Arr = [];
