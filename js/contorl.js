@@ -190,6 +190,23 @@ var process = function(n, _ag){
 	},++i*1000)
 }
 
+var initProcess = function(_ag){
+	isSelfAg = parseInt(_ag) || 0;
+	for(var i=0;i<3;i++){
+		setTimeout(function(){
+			shuffle()
+		},i*1000)
+	}
+}
+
+function finishShuffle(_ag){
+	isSelfAg = parseInt(_ag) || 0;
+	fold()
+	setTimeout(function(){
+		cutCard()
+	}, 1000)
+}
+
 function next(){
 	for(var i=0;i<len;i++){
 		var _redress = getRoutate(pArr[i].style.transform,'Z');

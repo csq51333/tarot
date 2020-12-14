@@ -84,6 +84,9 @@
 		.result{
 			top: 23rem;
 		}
+		.allResult {
+			top: 27rem;
+		}
 	</style>
 </head>
 <body>
@@ -97,7 +100,8 @@
 
 	<div class="save side">保存记录</div>
 	<div class="back side">返回首页</div>
-	<div class="result side">测试结果</div>
+	<div class="result side">当前结果</div>
+	<div class="allResult side" onclick="handleAllResult()">测试结果</div>
 </body>
 <script src="../js/truth.js"></script>
 <script src="../js/common.js"></script>
@@ -110,9 +114,11 @@ var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
 var back = document.querySelector('.back')
 var result = document.querySelector('.result')
+var allResult = document.querySelector('.allResult')
 var mes = getParmas() // 信息
 var backUrl = sessionStorage.getItem('backUrl')
 var rated = Tarr[mes.formation].rated
+var firstOpen = true
 
 if (!IsPC()) {
 	zhen.style.marginTop = '200px'
@@ -193,6 +199,7 @@ var handle = (function(){
 				console.log("order = "+index)
 			}
 			if(e.target.className == 'bei'){
+				allResult.style.display = 'none'
 				var el = e.target.parentNode
 				var index = e.target.parentNode.parentNode.attributes.order.value // 牌阵序号->按序号翻牌
 				if(i == parseInt(index) && i < Tarr[mes.formation].rated){
@@ -206,17 +213,18 @@ var handle = (function(){
 						el.removeChild(e.target)
 					},300)
 				} else if(i >= Tarr[mes.formation].rated){
-					alert("打住， 无需再翻")
+					alert("非占卜牌，无需翻开")
 				} else {
-					mask({
-						title:"牌阵详情",
-						content:'img',
-						imgSrc:Tarr[mes.formation].array,
-						className:"alertImg",
-						callback:function(_mark){
-							console.log("保存消失整了吗？")
-						}
-					})
+					alert('请按照提示顺序翻开塔罗牌')
+					// mask({
+					// 	title:"牌阵详情",
+					// 	content:'img',
+					// 	imgSrc:Tarr[mes.formation].array,
+					// 	className:"alertImg",
+					// 	callback:function(_mark){
+					// 		console.log("保存消失整了吗？")
+					// 	}
+					// })
 				}
 				
 			} else if(e.target.className == 'biao'){
@@ -295,6 +303,14 @@ function fan_all(){
 		}
 	}
 }
-
+function handleAllResult () {
+	// login.init()
+	if (firstOpen) {
+		firstOpen = false
+		fan_all()
+	}
+	markBox.style.display = markBox.style.display == 'block' ? 'none' : 'block'
+	console.log(login)
+}
 </script>
 </html>

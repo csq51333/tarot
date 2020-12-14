@@ -14,14 +14,29 @@
 			background-size: cover;
 			background-repeat: no-repeat;
 			color: rgba(255, 255, 255, .5);
+			overflow: auto;
+		}
+		.btn{
+			width: 5rem;
+			height: 3rem;
+			background-color: black;
+			color: white;
+			display: none;
+			border-radius: .5rem;
+			outline: none;
+			transition: 6s;
+			user-select: none;
+			font-size: 1rem;
 		}
 		#origin{
 			position: relative;
 			width: 0px;
 			height: 0px;
+			top: 5rem;
+			margin: 12rem auto 0;
+			transform: translateX(-30px);
 			border-radius: 10px;
 			background-color: black;
-			margin: 12rem auto 0;
 		}
 		#origin .start{
 			width: 5rem;
@@ -57,7 +72,9 @@
 			background-position: center center;
 		}
 		.remark{
+			max-width: 50%;
 			text-align: center;
+			margin: 16px auto 0;
 			font-size: 1rem;
 		}
 		.clt-item{
@@ -69,8 +86,12 @@
 </head>
 <body>
 	<div class="wrap">
-		<div class="remark">长按“开始”并在心里默念自己的问题，任意时间松开后自动洗牌</div>
+		<div class="remark">在心里默念自己的问题并洗牌，任意次数后点击完成，根据提示按顺序选牌</div>
 		<div id="collect" class="clearfix"></div>
+		<div style="width: 100%;height: 3rem;text-align: center; position: absolute;">
+			<button class="btn shuffle" onclick="shuffle()">洗牌</button>
+			<button class="btn finish" style="margin-left: 10px" onclick="handleFinish()">完成</button>
+		</div>
 		<div id="origin">
 			<button class="start">开始</button>
 		</div>
@@ -84,6 +105,7 @@
 var ogn = document.getElementById('origin')
 var clt = document.getElementById('collect')
 var start = document.querySelector('.start')
+var btn = document.querySelectorAll('.btn')
 var once = true;
 var items,lens;
 
@@ -153,6 +175,13 @@ function redirect(){
 	direct(_url)
 }
 
+function handleFinish(){
+	for(var i = 0; i < btn.length; i++) {
+		btn[i].style.display = 'none'
+	}
+	finishShuffle(mes.self)
+}
+
 var timer = null;
 var idx = 0;
 
@@ -202,5 +231,16 @@ function mobile(){
 	}
 }
 document.addEventListener('touchend',mobile);
+
+// 从这里开始覆写start的事件，不再用那种长按的模式了，太蛋疼，还是把洗牌功能放出来让用户自己点击好了
+start.onclick = function () {
+	initProcess(mes.self)
+	start.style.display = 'none'
+	setTimeout(function(){
+		for(var i = 0; i < btn.length; i++) {
+				btn[i].style.display = 'inline-block'
+			}
+	}, 3000)
+}
 </script>
 </html>
