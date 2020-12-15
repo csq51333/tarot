@@ -26,8 +26,9 @@ function coordinate(angle){
 }
 
 //初始以一个圆圈摆放牌
-function circle(){
-	for(var i=0;i<len;i++){
+function circle(arg){
+	pArr = (arg && arg.length) ? arg : pArr
+	for(var i=0;i<pArr.length;i++){
 		!function(i){
 			var ag = 360/len*i;
 			var left = coordinate(ag).x;
@@ -76,17 +77,43 @@ function messUp(){
 }
 
 //铺开函数
-function unfold(){
+function unfold(arg){
+	pArr = (arg && arg.length) ? arg : pArr
+	len = pArr.length
 	//横向铺开以z-index为序列
 	var _w = document.body.clientWidth;
 	document.getElementById('origin').style.marginTop = '10px'
 	var cha = 0;
 	for(var i=0;i<len;i++){
 		var T = ch/8 //将屏幕高度分成四份，决定每行上下间距
-		var f = (len*50/cw) + .4 //以左右间距30铺开，得出能份成几行
+		var f = (len*50/cw) + .4 //以左右间距50铺开，得出能份成几行
 		var c = parseInt(len/f) //每一行有多少张？
 		pArr[i].style.top = parseInt(pArr[i].style.zIndex/c) * T + 'px';
-		pArr[i].style.left = (pArr[i].style.zIndex%c)*50 - cw/2 + 20 + 'px';
+		pArr[i].style.left = (pArr[i].style.zIndex%c)*50 - cw/2 + 50 + 'px'; // 新补了一个30校正值。。。
+		
+		var ag = angleZ(pArr[i])
+		var zn = ZNWei(ag,'s')
+		// pArr[i].style.transform = 'rotateZ(' + zn + 'deg)'
+		pArr[i].setAttribute('wei',(zn % 360 == 180 ? '逆' : '正'))
+		pArr[i].wei = (zn == 180 ? '逆' : '正')
+	}
+}
+
+//铺开函数2
+function unfold2(arg){
+	pArr = (arg && arg.length) ? arg : pArr
+	len = pArr.length
+	//横向铺开以z-index为序列
+	var _w = document.body.clientWidth;
+	document.getElementById('origin').style.marginTop = '10px'
+	var cha = 0;
+	for(var i=0;i<len;i++){
+		var T = ch/4 // 决定每行上下间距
+		var f = (len*90/cw) + (IsPC() ? .7 : 3) //以左右间距90铺开，得出能份成几行
+		var c = Math.ceil(len/f) //每一行有多少张？
+		// var c = parseInt(len/f)
+		pArr[i].style.top = parseInt(pArr[i].style.zIndex/c) * T + 'px';
+		pArr[i].style.left = 16 + (pArr[i].style.zIndex%c)*90 + 'px';
 		
 		var ag = angleZ(pArr[i])
 		var zn = ZNWei(ag,'s')

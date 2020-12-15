@@ -1,6 +1,7 @@
 var truth = {
 	0:{
-		name:"愚人-The Fool",
+		name:"愚人",
+		eName: 'The Fool',
 		key:"开始、自由、天真、流浪、大胆勇敢勇敢勇敢勇敢、旅行",
 		imply:"现在不顾风险而有所行动。",
 		astrology:"天王星",
@@ -36,7 +37,8 @@ var truth = {
 		}
 	},
 	1:{
-		name:"魔法师-The Magician",
+		name:"魔法师",
+		eName: "The Magician",
 		key:"观察、开始、创造",
 		imply:"现在是展开新计划的好时机。",
 		astrology:"水星",
@@ -72,7 +74,8 @@ var truth = {
 		}
 	},
 	2:{
-		name:"女祭司-The High Priestess",
+		name:"女祭司",
+		eName: "The High Priestess",
 		key:"等待、智慧、理性、消极、静止",
 		imply:"这是向内探索、沉思，或按兵不动的时刻。",
 		astrology:"月亮",
@@ -108,7 +111,8 @@ var truth = {
 		}
 	},
 	3:{
-		name:"女皇-The Empress",
+		name:"女皇",
+		eName: "The Empress",
 		key:"高贵、热情、丰收",
 		imply:"家庭和谐及稳定",
 		astrology:"金星",
@@ -144,7 +148,8 @@ var truth = {
 		}
 	},
 	4:{
-		name:"皇帝-The Emperor",
+		name:"皇帝",
+		eName: "The Emperor",
 		key:"权力、威严、支配",
 		imply:"表示一种训练和实际致力于生活",
 		astrology:"白羊座",
@@ -180,7 +185,8 @@ var truth = {
 		}
 	},
 	5:{
-		name:"教皇-The Hierophant",
+		name:"教皇",
+		eName: "The Hierophant",
 		key:"宗教、传统、援助、仪式",
 		imply:"需要为你的心灵成长，及人生方向付起责任。",
 		astrology:"金牛座",
@@ -216,7 +222,8 @@ var truth = {
 		}
 	},
 	6:{
-		name:"恋人-The Lovers",
+		name:"恋人",
+		eName: "The Lovers",
 		key:"选择、爱情、性、结合、罗曼蒂克",
 		imply:"",
 		astrology:"双子座",
@@ -252,7 +259,8 @@ var truth = {
 		}
 	},
 	7:{
-		name:"战车-The Chariot",
+		name:"战车",
+		eName: "The Chariot",
 		key:"意志、自律、胜利、旅程、胜利、空虚",
 		imply:"",
 		astrology:"巨蟹座",
@@ -288,7 +296,8 @@ var truth = {
 		}
 	},
 	8:{
-		name:"力量-Strength",
+		name:"力量",
+		eName: "Strength",
 		key:"力量、勇气、信心、耐心",
 		imply:"",
 		astrology:"狮子座",
@@ -324,7 +333,8 @@ var truth = {
 		}
 	},
 	9:{
-		name:"隐士-The Hermit",
+		name:"隐士",
+		eName: "The Hermit",
 		key:"谨慎、内敛、自省、孤独、引导",
 		imply:"",
 		astrology:"处女座",
@@ -360,7 +370,8 @@ var truth = {
 		}
 	},
 	10:{
-		name:"命运之轮-Wheel Of Fortune",
+		name:"命运之轮",
+		eName: "Wheel Of Fortune",
 		key:"契机、转变、进展、运气",
 		imply:"",
 		astrology:"木星",
@@ -396,7 +407,8 @@ var truth = {
 		}
 	},
 	11:{
-		name:"正义-Justice",
+		name:"正义",
+		eName: "Justice",
 		key:"公正、均衡、责任",
 		imply:"",
 		astrology:"天秤座",
@@ -432,7 +444,8 @@ var truth = {
 		}
 	},
 	12:{
-		name:"倒吊者-The Hanged Man",
+		name:"倒吊者",
+		eName: "The Hanged Man",
 		key:"牺牲、等待、换位思考、以退为进",
 		imply:"",
 		astrology:"海王星",
@@ -468,7 +481,8 @@ var truth = {
 		}
 	},
 	13:{
-		name:"死神-Death",
+		name:"死神",
+		eName: "Death",
 		key:"结束、转变、新生",
 		imply:"",
 		astrology:"天蝎座",
@@ -504,7 +518,8 @@ var truth = {
 		}
 	},
 	14:{
-		name:"节制-Temperance",
+		name:"节制",
+		eName: "Temperance",
 		key:"协调、配合、节制、净化、治疗",
 		imply:"",
 		astrology:"射手座",
@@ -540,7 +555,8 @@ var truth = {
 		}
 	},
 	15:{
-		name:"恶魔-The Devil",
+		name:"恶魔",
+		eName: "The Devil",
 		key:"欲望、束缚、沉溺、物质",
 		imply:"",
 		astrology:"摩羯座",
@@ -576,7 +592,8 @@ var truth = {
 		}
 	},
 	16:{
-		name:"高塔-The Tower",
+		name:"高塔",
+		eName: "The Tower",
 		key:"骤变、灾难、破坏、意外",
 		imply:"",
 		astrology:"火星",
@@ -612,7 +629,8 @@ var truth = {
 		}
 	},
 	17:{
-		name:"星辰-The Stars",
+		name:"星辰",
+		eName: "The Stars",
 		key:"希望、祝福",
 		imply:"",
 		astrology:"水瓶座",
@@ -648,7 +666,8 @@ var truth = {
 		}
 	},
 	18:{
-		name:"月亮-The Moon",
+		name:"月亮",
+		eName: "The Moon",
 		key:"不安、多变、忧郁、刻薄",
 		imply:"",
 		astrology:"双鱼座",
@@ -684,7 +703,8 @@ var truth = {
 		}
 	},
 	19:{
-		name:"太阳-The Sun",
+		name:"太阳",
+		eName: "The Sun",
 		key:"成功、自由、喜悦、阳光",
 		imply:"",
 		astrology:"太阳",
@@ -720,7 +740,8 @@ var truth = {
 		}
 	},
 	20:{
-		name:"审判-Judgement",
+		name:"审判",
+		eName: "Judgement",
 		key:"复活、觉醒、回忆",
 		imply:"",
 		astrology:"冥王星",
@@ -756,7 +777,8 @@ var truth = {
 		}
 	},
 	21:{
-		name:"世界-The World",
+		name:"世界",
+		eName: "The World",
 		key:"复活、觉醒、回忆",
 		imply:"",
 		astrology:"土星",
@@ -792,7 +814,7 @@ var truth = {
 		}
 	},
 	22:{
-		name:"权杖ACE（权杖一）",
+		name:"权杖一",
 		key:"能源的源头。开始。强而有力。精神。事业。发明。冒险的开始",
 		imply:"",
 		astrology:"",

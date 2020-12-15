@@ -50,7 +50,7 @@
 var mes = getParmas() // 信息
 var img = document.querySelector(".img")
 var cont = document.querySelector(".content")
-img.src = '../img/'+mes.kind+""+mes.No+".jpg"
+img.src = '../img/'+(mes.kind || 'waite/')+""+mes.No+".jpg"
 
 var contrast = {
 	name: "名称 ： ",

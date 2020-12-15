@@ -89,6 +89,23 @@
 		select {
 			font-size: 1rem;
 		}
+		.tab-menu {
+			height: 2rem;
+			margin: 10 auto;
+			text-align: center;
+		}
+		.tab-menu .tab-menu-item {
+			display: inline-block;
+			padding: .5rem;
+			margin: 0 10px;
+			cursor: pointer;
+			border-radius: 4px;
+			background-color: gray;
+			color: white;
+		}
+		.tab-menu .tab-menu-item:hover {
+			color: yellowgreen;
+		}
 	</style>
 </head>
 <body>
@@ -133,7 +150,10 @@
 		</li>
 		<div class="go">go</div>
 	</ul>
-
+	
+	<div class="tab-menu">
+		<div class="learn-rediect tab-menu-item" onclick="learnRedirect()">塔罗学习</div>
+	</div>
 	<div class="recordBox">
 		<div class="recordTitle">
 			<h3>历史记录</h3>
@@ -244,6 +264,10 @@ function preImg(num){
 			imgArr[i].src = './img/'+kind+i+'.jpg'
 		}
 	}
+}
+function learnRedirect() {
+	// 
+	direct('./src/learnTarot.html')
 }
 </script>
 </html>

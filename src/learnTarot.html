@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="../css/globle.css">
+	<title>塔罗牌学习</title>
+	<style type="text/css">
+		.container {
+			height: 100vh;
+			background-image: url('../img/b2.jpg');
+			background-size: cover;
+			overflow: auto;
+		}
+		.wrap{
+			margin: 24px 0;
+			position: relative;
+		}
+		#origin{
+			width: 100%;
+			min-height: 100vh;
+			display: flex;
+			flex-wrap: wrap;
+			align-content: center;
+			justify-content: center;
+			margin: 0 auto;
+			right: 0;
+		}
+		.pai{
+			width: 5rem;
+			height: 8.6rem;
+			position: relative;
+			box-sizing: border-box;
+			border:1px solid transparent;
+			border-radius: 5px;
+			background-color: cyan;
+			/*transition: 1s;*/
+		}
+		.box{
+			width: 5rem;
+			height: 10rem;
+			margin: 5px 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.caption{
+			width: 100%;
+			max-height: 20px;
+			line-height: 20px;
+			text-align: center;
+			font-size: 1rem;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="wrap">
+		<div id="origin"></div>
+	</div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/contorl.js"></script>
+<script src="../js/truth.js"></script>
+<script type="text/javascript">
+	var og = document.getElementById('origin')
+	og.addEventListener('click',handle)
+	function handle (e) {
+		if(e.target.className == 'biao') {
+			var el = e.target.parentNode
+			var numbers = el.getAttribute('no.')
+			var _url = 'detail.html?No='+numbers+"&kind="
+			direct(_url)
+		}
+	}
+	for(let i = 0; i < 78; i++){
+		var box = document.createElement("div");
+		box.className = 'box'
+		// if (!IsPC()) {
+		// 	box.style.top = Arrays.y/2 - 8 + 'rem'
+		// 	box.style.left = Arrays.x/2 - 6 + 'rem'
+		// } else {
+		// 	box.style.top = Arrays.y + 5 + 'vw'
+		// 	box.style.left = Arrays.x - 10 + 'vw'
+		// }
+		createPai(box, i, 'positive')
+		var p = document.createElement('p');
+		p.className = 'caption';
+		p.innerHTML = truth[i].name;
+		box.appendChild(p);
+		og.appendChild(box);
+	}
+	var pArr = document.querySelectorAll('.box');
+	circle(pArr)
+	unfold2(pArr)
+	for(var i=0,len = pArr.length;i<len;i++){
+		pArr[i].querySelector(".biao").style.zIndex = "10";
+		pArr[i].style.transform = "rotateZ(" +angleZ(pArr[i]) + "deg) rotateY(0deg)"
+		var zn = pArr[i].getAttribute('wei') == '正' ? 'z' : 'n';
+
+	}
+</script>
+</body>
+</html>

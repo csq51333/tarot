@@ -15,6 +15,7 @@
 			background-repeat: no-repeat;
 			color: rgba(255, 255, 255, .5);
 			overflow: auto;
+			position: relative;
 		}
 		.btn{
 			width: 5rem;
@@ -33,7 +34,7 @@
 			width: 0px;
 			height: 0px;
 			top: 5rem;
-			margin: 12rem auto 0;
+			margin: 15rem auto 0;
 			transform: translateX(-30px);
 			border-radius: 10px;
 			background-color: black;
@@ -58,6 +59,7 @@
 			background-color: rgba(0,0,0,.5);
 			/*background-color: grey;*/
 			text-align: center;
+			margin-bottom: 16px
 		}
 		#collect > *{
 			width: 5rem;
@@ -230,7 +232,7 @@ function mobile(){
 		start.style.display = "none";
 	}
 }
-document.addEventListener('touchend',mobile);
+// document.addEventListener('touchend',mobile);
 
 // 从这里开始覆写start的事件，不再用那种长按的模式了，太蛋疼，还是把洗牌功能放出来让用户自己点击好了
 start.onclick = function () {
