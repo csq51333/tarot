@@ -6,8 +6,11 @@
 	<link rel="stylesheet" href="../css/globle.css">
 	<title>牌阵页</title>
 	<style>
+		html, body{
+			width: 100%;
+			height: 100%;
+		}
 		.wrap{
-			min-height: 800px;
 			height: 100%;
 			background-image: url('../img/bg1.jpg');
 			background-position: 50% 50%;
@@ -16,6 +19,8 @@
 			color: rgba(255, 255, 255, .5);
 		}
 		.hearder{
+			padding: 4px;
+			box-sizing: border-box;
 			text-align: center;
 			height: 5rem;
 			background-color: black;
@@ -82,10 +87,77 @@
 			top: 19rem;
 		}
 		.result{
+			display: none;
 			top: 23rem;
 		}
 		.allResult {
 			top: 27rem;
+		}
+		.rotation {
+			width: 100%;
+			height: 100vh;
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background-color: rgba(0, 0, 0, .7);
+		}
+		.rotation-box {
+			width: 80vw;
+			height: 50vh;
+			overflow: hidden;
+			position: relative;
+			top: 50%;
+			left: 50%;
+			border-radius: 4vw;
+			transform: translate(-50%, -50%);
+			background-color: rgba(0, 200, 255, .3);
+		}
+		.step-btn {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 40px;
+			height: 40px;
+			line-height: 36px;
+			border-radius: 50%;
+			border: 1px solid white;
+			background:rgba(0, 0, 0, .7);
+			color: white;
+			text-align: center;
+			font-size: 20px;
+			z-index: 100000;
+		}
+		.next {
+			right: 5vw;
+		}
+		.last {
+			left: 5vw;
+		}
+		.move {
+			display: flex;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			transition: .6s;
+		}
+		.move .move-item {
+			width: 80vw;
+			height: 50vh;
+			padding: 20px;
+			box-sizing: border-box;
+			border-radius: 2vw;
+			text-align: center;
+		}
+		.move-item-content {
+			height: 100%;
+			border-radius: 2vw;
+			overflow: auto;
+			color: white;
+		}
+		.move-item-content p {
+			text-align: left;
+			text-indent: 20px;
 		}
 	</style>
 </head>
@@ -100,8 +172,16 @@
 
 	<div class="save side">保存记录</div>
 	<div class="back side">返回首页</div>
-	<div class="result side">当前结果</div>
-	<div class="allResult side" onclick="handleAllResult()">测试结果</div>
+	<div class="result side">测试结果</div>
+	<div class="allResult side" onclick="handleAllResult(event)">获取结果</div>
+	<!-- 轮播弹框 -->
+	<div class="rotation" onclick="handleAllResult(event)">
+		<div class="next step-btn" onclick="moveStep(-1, event)">></div>
+		<div class="last step-btn" onclick="moveStep(1, event)"><</div>
+		<section class="rotation-box">
+			<div class="move"></div>
+		</section>
+	</div>	
 </body>
 <script src="../js/truth.js"></script>
 <script src="../js/common.js"></script>
@@ -109,20 +189,30 @@
 <script>
 var zhen = document.querySelector('.zhen')
 var cap = document.querySelectorAll('.caption')
+var wrap = document.querySelector('.wrap')
+var hearder = document.querySelector('.hearder')
 var current = document.querySelector('.current')
 var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
 var back = document.querySelector('.back')
 var result = document.querySelector('.result')
 var allResult = document.querySelector('.allResult')
+var rotationWrap = document.querySelector('.rotation')
+var rotationMove = document.querySelector('.move')
+
 var mes = getParmas() // 信息
 var backUrl = sessionStorage.getItem('backUrl')
 var rated = Tarr[mes.formation].rated
 var firstOpen = true
 
 if (!IsPC()) {
-	zhen.style.marginTop = '200px'
-	document.documentElement.style.fontSize = '13px'
+	zhen.style.marginTop = '100px'
+	document.documentElement.style.fontSize = '11px'
+	wrap.style.backgroundImage = "url('')"
+	hearder.innerHTML = '手机上也许会出现展示牌阵展示不完全的情况，可上下左右滑动手机检查一下'
+	setTimeout(function () {
+		hearder.style.opacity = 0
+	}, 2300)
 }
 
 var login = {
@@ -171,22 +261,41 @@ login.init()
 
 //解析展示栏 -> 调用解析对象，具体标签由nature决定
 //渲染到li中，我在犹豫要不要整：点击详情页？
-function createMark(idx,odr,type,zn){
-	// idx : 塔罗牌号
-	// odr : 牌阵位号
-	// type : 测试类型：健康/工作
-	// zn ：牌的正逆位
+// function createMark(idx,odr,type,zn){
+// 	// idx : 塔罗牌号
+// 	// odr : 牌阵位号
+// 	// type : 测试类型：健康/工作
+// 	// zn ：牌的正逆位
 
+// 	var lineUp = Tarr[mes.formation] // 牌阵对象
+
+// 	current.innerHTML = compare[type]+"测试，当前阵位："+ lineUp[odr].conte //导航提示信息
+// 	var li = document.createElement('li');
+// 	li.className = "mark";
+// 	var r = rd(0,200), g = rd(0,180), b = rd(0,200);
+// 	li.innerHTML = "<h2>"+lineUp[odr].conte+"：</h2>" + truth[idx][type][zn];
+// 	li.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
+// 	document.querySelectorAll('.box')[odr].querySelector('.caption').style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
+// 	markBox.appendChild(li)
+// }
+
+function createMark(idx, odr, type, zn){
 	var lineUp = Tarr[mes.formation] // 牌阵对象
-
-	current.innerHTML = compare[type]+"测试，当前阵位："+ lineUp[odr].conte //导航提示信息
-	var li = document.createElement('li');
-	li.className = "mark";
+	current.innerHTML = compare[type] + "当前阵位："+ lineUp[odr].conte // 导航提示信息
+	var div1 = document.createElement('div');
+	var div2 = document.createElement('div');
+	div1.className = "move-item";
+	div2.className = "move-item-content";
 	var r = rd(0,200), g = rd(0,180), b = rd(0,200);
-	li.innerHTML = "<h2>"+lineUp[odr].conte+"：</h2>" + truth[idx][type][zn];
-	li.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
-	document.querySelectorAll('.box')[odr].querySelector('.caption').style.backgroundColor = 'rgb('+ r +','+ g +','+ b +')';
-	markBox.appendChild(li)
+	var znMap = {
+		z: '正位',
+		n: '逆位'
+	}
+	div2.innerHTML = "<h3>"+lineUp[odr].conte+"：</h3>" + "<h3>" + znMap[zn]+truth[idx].name + "</h3>" + truth[idx][type][zn];
+	div1.style.backgroundColor = 'rgb('+ r +','+ g +','+ b +', .5)';
+	document.querySelectorAll('.box')[odr].querySelector('.caption').style.backgroundColor = 'rgb('+ r +','+ g +','+ b +', .5)';
+	div1.appendChild(div2)
+	rotationMove.appendChild(div1)
 }
 
 //操作牌的核心处理函数
@@ -212,6 +321,9 @@ var handle = (function(){
 					setTimeout(function(){
 						el.removeChild(e.target)
 					},300)
+					if (i >= Tarr[mes.formation].rated) {
+						result.style.display = 'block'
+					}
 				} else if(i >= Tarr[mes.formation].rated){
 					alert("非占卜牌，无需翻开")
 				} else {
@@ -273,10 +385,10 @@ back.onclick = function(){
 }
 
 result.onclick = function(){
-	if (markBox.style.display == 'block') {
-		markBox.style.display = 'none'
+	if (rotationWrap.style.display == 'block') {
+		rotationWrap.style.display = 'none'
 	} else {
-		markBox.style.display = 'block'
+		rotationWrap.style.display = 'block'
 	}
 }
 
@@ -302,15 +414,28 @@ function fan_all(){
 
 		}
 	}
+	firstOpen = false
 }
-function handleAllResult () {
+function handleAllResult (e) {
 	// login.init()
 	if (firstOpen) {
 		firstOpen = false
 		fan_all()
 	}
-	markBox.style.display = markBox.style.display == 'block' ? 'none' : 'block'
+	rotationWrap.style.display = rotationWrap.style.display == 'block' ? 'none' : 'block'
 	console.log(login)
+}
+
+function moveStep (n, e) {
+	if(e && e.stopPropagation) {
+		e.stopPropagation();
+	} else {
+		window.event.cancelBubble = true;
+	}
+	let itemWidth = document.querySelector('.move-item').offsetWidth
+	let step = itemWidth * (n || 1)
+	let resultLeft = rotationMove.offsetLeft + step
+	rotationMove.style.left =  Math.min(0, Math.max(itemWidth - rotationMove.offsetWidth, resultLeft)) + 'px'
 }
 </script>
 </html>
