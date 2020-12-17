@@ -1,5 +1,5 @@
-var cw = document.body.clientWidth;//屏幕宽度，兼容不写
-var ch = document.body.clientHeight;//屏幕宽度，懒得管兼容
+var cw = document.documentElement.clientWidth || document.body.clientWidth;// 屏幕宽度
+var ch = document.documentElement.clientHeight|| document.body.clientHeight;// 屏幕高度
 var eccent = IsPC() ? 9 : 3
 var radius = IsPC() ? 150 : 120
 var redress = cw > ch ? ch/eccent : cw/eccent //矫正值，为了居中
