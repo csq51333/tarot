@@ -8,18 +8,17 @@
 	<style>
 		.colls{
 			margin: 2rem auto;
-			border: 1px dotted black;
 			border-radius: 10px;
 			padding: .5rem;
 			width: 80%;
-			background-color: gray;
+			background-color: #c1c1c1;
 			list-style: none;
 		}
 		.colls .item{
 			height: 2rem;
 			line-height: 2rem;
 			margin: 10px 0;
-			background-color: black;
+			background-color: #303133;
 			display: flex;
 			padding: .5rem;
 			justify-content: space-between;
@@ -30,22 +29,24 @@
 		.colls .go{
 			width: 2.5rem;
 			height: 2.5rem;
-			line-height: 2rem;
+			line-height: 2.5rem;
 			border-radius: 50%;
-			background-color: black;
+			background-color: #409eff;
 			color: white;
 			margin: 0 auto;
 			text-align: center;
+			cursor: pointer;
 		}
 		.recordBox{
 			width: 100%;
 		}
 		.recordTitle{
-			background-color: gray;
+			background-color: #c1c1c1;
 			color-rendering: red;
 			text-align: center;
 			margin: 10px auto;
 			width: 40%;
+			color: white;
 		}
 		.hist{
 			width: 80%;
@@ -54,11 +55,11 @@
 			margin: 0 auto;
 			padding: .5rem;
 			border-radius: 5px;
-			background-color: gray;
+			background-color: #c1c1c1;
 			color: white;
 		}
 		.hist>li{
-			background-color: black;
+			background-color: #303133;
 			height: 2rem;
 			line-height: 2rem;
 			border-radius: 5px;
@@ -100,7 +101,7 @@
 			margin: 0 10px;
 			cursor: pointer;
 			border-radius: 4px;
-			background-color: gray;
+			background-color: #409eff;
 			color: white;
 		}
 		.tab-menu .tab-menu-item:hover {
@@ -148,11 +149,11 @@
 				<option value="-90">他人</option>
 			</select>
 		</li>
-		<div class="go">go</div>
+		<div class="go">开始</div>
 	</ul>
 	
 	<div class="tab-menu">
-		<div class="learn-rediect tab-menu-item" onclick="learnRedirect()">塔罗学习</div>
+		<div class="learn-rediect tab-menu-item" onclick="learnRedirect()">塔罗牌目录</div>
 	</div>
 	<div class="recordBox">
 		<div class="recordTitle">

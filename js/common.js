@@ -180,3 +180,40 @@ function direct(url){
 	}
 	return sessionStorage.getItem('backUrl');
 }
+
+// 防抖
+function debounce (func, wait, immediate) {
+  let timeout;
+  return function () {
+    let content = this;
+    let args = arguments;
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      let callNow = !timeout;
+      timeout = setTimeout(() => {
+        timeout = null;
+      }, wait);
+      if (callNow) func.apply(content, args);
+    } else {
+      timeout = setTimeout(() => {
+        func.apply(content, args);
+      }, wait);
+    }
+  };
+}
+
+
+// 节流
+function throttle(fn,wait){
+ var pre = Date.now();
+ return function(){
+     var context = this;
+     var args = arguments;
+     var now = Date.now();
+     if( now - pre >= wait){
+         fn.apply(context,args);
+         pre = Date.now();
+     }
+ }
+}
+

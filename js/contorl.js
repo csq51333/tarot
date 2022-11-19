@@ -99,7 +99,7 @@ function unfold(arg){
 	}
 }
 
-//铺开函数2
+//铺开函数2 -- 这个才是最初使用的方法，年代久远，忘记这为什么被弃用，貌似对齐间距问题
 function unfold2(arg){
 	pArr = (arg && arg.length) ? arg : pArr
 	len = pArr.length
@@ -123,7 +123,7 @@ function unfold2(arg){
 	}
 }
 
-//切三叠牌，再也不要用递归这种蛋疼玩意儿来写了....
+//切三叠牌
 function cutCard(){
 	var i = arguments[0] || 0;  //记步数，这是第几次递归
 	var rand = arguments[1] || 0;  // 切三叠拍，每叠随机数
@@ -200,24 +200,28 @@ function cutCard(){
 }
 
 // 自动洗牌一套动作集合，传参洗几遍，默认3次
-var process = function(n, _ag){
+var process = function(n, _ag = 90){
 	var lens = n || 3
 	isSelfAg = parseInt(_ag) || 0;
 	// document.getElementById('origin').style.animation = "circle "+i+"s linear"
 	for(var i=0;i<lens;i++){
 		setTimeout(function(){
+			// 洗牌动作
 			shuffle()
-		},i*1000)
+		}, i*1000)
 	}
 	setTimeout(function(){
+		// 合牌动作
 		fold()
-	},i*1000)
+	}, ++i*1000)
 	setTimeout(function(){
+		// 切三叠后收牌，附带铺开动作
 		cutCard()
-	},++i*1000)
+	}, ++i*1000)
 }
 
-var initProcess = function(_ag){
+// 初始化上来摊开所有牌
+var initProcess = function(_ag = 90){
 	isSelfAg = parseInt(_ag) || 0;
 	for(var i=0;i<3;i++){
 		setTimeout(function(){
@@ -226,7 +230,8 @@ var initProcess = function(_ag){
 	}
 }
 
-function finishShuffle(_ag){
+// 直接完成洗牌，复合动作：合牌，收牌，平铺开
+function finishShuffle(_ag = 90){
 	isSelfAg = parseInt(_ag) || 0;
 	fold()
 	setTimeout(function(){

@@ -10,14 +10,28 @@
 			width: 100%;
 			height: 100%;
 		}
-		.wrap{
-			height: 100%;
-			background-image: url('../img/bg1.jpg');
-			background-position: 50% 50%;
-			background-size: cover;
-			background-repeat: no-repeat;
-			color: rgba(255, 255, 255, .5);
+		.wrap {
+		 height: 100vh;
+		 overflow: auto;
+		 background-color: hsl(23, 57%, 40%);
+		 background-image: -webkit-repeating-linear-gradient(transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, 
+transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, 
+rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, 
+rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, 
+rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+repeating-linear-gradient(270deg, transparent, transparent 50px, rgba(0,0,0,.4) 50px, rgba(0,0,0,.4) 53px, 
+transparent 53px, transparent 63px, rgba(0,0,0,.4) 63px, rgba(0,0,0,.4) 66px, transparent 66px, transparent 116px, 
+rgba(0,0,0,.5) 116px, rgba(0,0,0,.5) 166px, rgba(255,255,255,.2) 166px, rgba(255,255,255,.2) 169px, 
+rgba(0,0,0,.5) 169px, rgba(0,0,0,.5) 179px, rgba(255,255,255,.2) 179px, rgba(255,255,255,.2) 182px, 
+rgba(0,0,0,.5) 182px, rgba(0,0,0,.5) 232px, transparent 232px),
+repeating-linear-gradient(125deg, transparent, transparent 2px, rgba(0,0,0,.2) 2px, rgba(0,0,0,.2) 3px, 
+transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
+		 background-position: 50% 50%;
+		 background-size: cover;
+		 background-repeat: no-repeat;
+		 color: rgba(255, 255, 255, .5);
 		}
+
 		.hearder{
 			padding: 4px;
 			box-sizing: border-box;
@@ -426,7 +440,7 @@ function handleAllResult (e) {
 	console.log(login)
 }
 
-function moveStep (n, e) {
+var moveStep = throttle(function(n, e) {
 	if(e && e.stopPropagation) {
 		e.stopPropagation();
 	} else {
@@ -436,6 +450,6 @@ function moveStep (n, e) {
 	let step = itemWidth * (n || 1)
 	let resultLeft = rotationMove.offsetLeft + step
 	rotationMove.style.left =  Math.min(0, Math.max(itemWidth - rotationMove.offsetWidth, resultLeft)) + 'px'
-}
+}, 600)
 </script>
 </html>

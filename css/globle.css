@@ -129,11 +129,10 @@ a{
 	width: 6rem;
 	height: 3rem;
 	line-height: 3rem;
-	background-color: black;
+	background-color: #409EFF;
 	position: fixed;
 	text-align: center;
 	border-radius: .2rem;
-	border: 1px solid gray;
 	color: white;
 	right: 0;
 	font-size: 1rem;
