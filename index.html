@@ -74,6 +74,9 @@
 			float: left;
 			width: 55%;
 		}
+		.autoHeight {
+			height: auto !important;
+		}
 		.recordDate{
 			width: 35%;
 			float: right;
@@ -203,16 +206,28 @@ var selec = (function(){
 	}
 })()
 
-for(i in localStorage){
-	if(/Tarot/.test(i)){
-		var obj = JSON.parse(localStorage[i])
-		console.log(obj)
+var localObj = {};
+try {
+	let arr = [];
+	for(i in localStorage){
+		console.log(localStorage)
+		if(/Tarot/.test(i)){
+			arr.push(i.split('Tarot')[1])
+		}
+	}
+	arr = arr.sort((a, b) => a - b)
+	arr.forEach(i => {
+		localObj = JSON.parse(localStorage["Tarot" + i])
 		var cache = hist.innerHTML;
 		hist.innerHTML = "";
-		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ obj.record +'"><p class="problem ellipsis">'+ obj.remark +'</p><p class="recordDate ellipsis">'+formatTime(obj.date)+'</p></a><span class="detele" data-Id="' + i + '"">x</span></li>';
+		hist.innerHTML += '<li class="clearfix"><a href="src/TarotArray.html?'+ localObj?.record +'"><p class="problem ellipsis">'+ (localObj?.remark || "无效数据，保存失败") +'</p><p class="recordDate ellipsis">'+formatTime((localObj?.date || null))+'</p></a><span class="detele" data-Id="' + i + '"">x</span></li>';
 		hist.innerHTML += cache
-	}
-}
+	})
+} catch (e) {
+	hist.innerHTML += `<li class="clearfix autoHeight">
+		<a><p class="problem" style="color: red">报错信息:${e}! ------ 历史数据对象:${JSON.stringify(localObj)}</p><p class="">历史数据加载失败，如有需要，请自行保存网页收藏占卜结果</p></a><span class="detele"></span>
+	</li>`;
+};
 ki.onchange = function(){
 	var currentVal = ki.value;
 	isCanGo = false;
