@@ -36,7 +36,7 @@ transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
 			padding: 4px;
 			box-sizing: border-box;
 			text-align: center;
-			height: 5rem;
+			height: 3rem;
 			background-color: black;
 			color: white;
 		}
@@ -45,7 +45,7 @@ transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
 		}
 		.current{
 			height: 100%;
-			line-height: 5rem;
+			line-height: 3rem;
 		}
 		.zhen{
 			width: 60%;
@@ -64,7 +64,7 @@ transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
 			background-color: gray;
 			line-height: 20px;
 			text-align: center;
-			font-size: 1rem;
+			font-size: 0.6rem;
 			color: white;
 			position: absolute;
 			bottom: 0;
@@ -187,6 +187,7 @@ transparent 3px, transparent 5px, rgba(0,0,0,.2) 5px);
 	<div class="save side">保存记录</div>
 	<div class="back side">返回首页</div>
 	<div class="result side">测试结果</div>
+	<div class="export side">导出结果</div>
 	<div class="allResult side" onclick="handleAllResult(event)">获取结果</div>
 	<!-- 轮播弹框 -->
 	<div class="rotation" onclick="handleAllResult(event)">
@@ -210,6 +211,7 @@ var markBox = document.querySelector('.remarks')
 var save = document.querySelector('.save')
 var back = document.querySelector('.back')
 var result = document.querySelector('.result')
+var exports = document.querySelector('.export')
 var allResult = document.querySelector('.allResult')
 var rotationWrap = document.querySelector('.rotation')
 var rotationMove = document.querySelector('.move')
@@ -405,7 +407,9 @@ result.onclick = function(){
 		rotationWrap.style.display = 'block'
 	}
 }
-
+exports.onclick = function() {
+	console.log('点击导出记录',getParmas())
+};
 function isSave(checks){
 	var _check = 'Tarot'+checks;
 	for(x in localStorage){

@@ -20,10 +20,72 @@ var Tarr = {
 		},
 		Chinese:"圣三角牌阵",
 		English:"three",
-		type:"工作学业健康生活人际财富",
+		type:"工作学业健康生活人际财富恋情婚姻",
 		array: "../img/card-array/three.jpg",
 		rated: 3,
 		total: 3
+	},
+	reback:{
+		0:{
+			x:8,
+			y:0,
+			ag:0,
+			conte:"1.过去的状态"
+		},
+		1:{
+			x:18,
+			y:10,
+			ag:0,
+			conte:"2.自己的现状"
+		},
+		2:{
+			x:28,
+			y:20,
+			ag:0,
+			conte:"3.对方的现状"
+		},
+		3:{
+			x:38,
+			y:30,
+			ag:0,
+			conte:"4.自己复合的感觉"
+		},
+		4:{
+			x:48,
+			y:40,
+			ag:0,
+			conte:"5.对方复合的感觉"
+		},
+		5:{
+			x:48,
+			y:0,
+			ag:0,
+			conte:"6.复合的阻碍"
+		},
+		6:{
+			x:38,
+			y:10,
+			ag:0,
+			conte:"7.复合的帮助"
+		},
+		7:{
+			x:18,
+			y:30,
+			ag:0,
+			conte:"8.未知因素"
+		},
+		8:{
+			x:8,
+			y:40,
+			ag:0,
+			conte:"9.结果或决定"
+		},
+		Chinese:"复合牌阵",
+		English:"reback",
+		type:"人际财富恋情婚姻",
+		array: "../img/card-array/three.jpg",
+		rated: 9,
+		total: 9
 	},
 	// selectTwo: {
 	// 	0:{
